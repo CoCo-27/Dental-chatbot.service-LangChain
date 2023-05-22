@@ -1,0 +1,6 @@
+[
+  { "id": "home", "name": "Home" },
+  { "id": "terms", "name": "Terms of service" },
+  { "id": "policy", "name": "Privacy Policy" },
+  { "id": "contact", "name": "Contact us" }
+]
