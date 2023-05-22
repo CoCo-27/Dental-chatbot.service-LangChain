@@ -77,7 +77,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
         />
 
         <div className="flex justify-between">
-          <div className="hidden min-[800px]:block">
+          <div className="hidden mobile:block">
             {location.pathname !== '/login' && (
               <div
                 className={`flex gap-8 h-fit items-center ${
@@ -143,7 +143,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
           </div>
           {location.pathname !== '/login' && (
             <div className="relative">
-              <div className="flex min-[800px]:hidden bg-gray-100">
+              <div className="flex mobile:hidden bg-gray-100">
                 <Menu.Button
                   // onClick={() => setIsOpen(!isOpen)}
                   className="bg-gray-200 inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white"
@@ -196,7 +196,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
                 leaveTo="transform opacity-0 scale-95"
               >
                 {(ref) => (
-                  <div className="md:hidden" id="mobile-menu">
+                  <div className="mobile:hidden" id="mobile-menu">
                     <div
                       ref={ref}
                       className="px-2 top-[25px] right-[-11px] absolute pb-3 space-y-3 -px-5 bg-gray-100"
