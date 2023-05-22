@@ -16,11 +16,11 @@ const Chat = () => {
   return (
     <div className="flex justify-stretch h-[calc(100vh-96px)] w-full sm:pt-0 relative">
       <div className="w-full flex justify-center max-[1024px]:w-full">
-        <div className="flex w-8/12 max-[1024px]:w-full max-[800px]:w-[100%]">
+        <div className="flex w-full laptop:w-8/12">
           <ChatMiddle />
         </div>
-        <div className="w-4/12 h-full min-w-[290px] flex max-[800px]:w-[290px] max-[800px]:right-[-290px]  max-[800px]:absolute z-10 hover:right-0 transition-all">
-          <div className="absolute left-[-40px] top-0 p-2">
+        <div className="h-full w-[290px] flex mobile:w-4/12 right-[-290px] mobile:right-0 absolute mobile:relative z-10 hover:right-0 transition-all">
+          <div className="absolute left-[-40px] mobile:left-0 top-0 p-2">
             <IconChevronsLeft className="text-[30px] font-bold text-black" />
           </div>
           <RightBar />

@@ -107,7 +107,7 @@ const Chat = () => {
         <div className="relative flex w-full flex-row mt-4 p-2 justify-center items-center rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
           <input
             ref={inputRef}
-            className="m-0 w-full resize-none border-0 overflow-hidden bg-transparent py-2 pr-8 text-black dark:bg-transparent dark:text-white md:py-2 md:pl-4"
+            className="m-0 w-full resize-none border-0 overflow-hidden bg-transparent py-2 pl-4 pr-8 text-black dark:bg-transparent dark:text-white md:py-2 md:pl-4"
             value={formValue}
             required
             placeholder="Type a message ..."
