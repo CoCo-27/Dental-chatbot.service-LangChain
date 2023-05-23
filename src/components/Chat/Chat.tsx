@@ -9,7 +9,7 @@ const Chat = () => {
   const inputRef = useRef();
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState('');
-  const [array, setArray] = useState([]);
+  const [array, setArray] = useState(JSON.parse(localStorage.getItem('chat_history')) ? JSON.parse(localStorage.getItem('chat_history')) : []);
   const [text, setText] = useState({
     data: '',
     type: false,
@@ -45,9 +45,13 @@ const Chat = () => {
     if (!localStorage.getItem('email') && isFree !== 1) {
       notification.warning({
         message: '',
-        description: 'You must log in to ask more questions.',
+        description: 'You have to register for more then one question',
         duration: 2,
+	style: {
+		width: 440,
+	}
       });
+	navigate('/login');
     } else {
       setFormValue('');
       const save = array.slice();
@@ -61,6 +65,7 @@ const Chat = () => {
           update[update.length - 1].message = res.data.text;
           update[update.length - 1].flag = true;
           setArray(update);
+          localStorage.setItem('chat_history', JSON.stringify(update));
           localStorage.setItem('historyFlag', 'true');
           setIsFree(isFree + 1);
         })

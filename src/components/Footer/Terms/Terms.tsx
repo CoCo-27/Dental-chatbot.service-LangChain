@@ -14,106 +14,57 @@ const Terms = () => {
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="relative mx-auto max-w-[37.5rem] pt-20 text-center pb-24">
           <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
-            Terms of Service
+          Nutzungsbedingungen
           </h1>
           <p className="mt-4 text-base leading-7 text-slate-600">
-            Last updated: May 4, 2023
+          Letzte Aktualisierung: 4. Mai 2023
           </p>
         </div>
       </div>
       <div className="relative px-4 pb-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[50rem] prose-xl prose prose-slate prose-a:font-semibold prose-a:text-sky-500 hover:prose-a:text-sky-600">
           <p>
-            Welcome to Case Cruncher! These Terms of Service ("Terms") govern
-            your access and use of the Case Cruncher website ("Website") and
-            services ("Services") provided by Case Cruncher, Inc. ("us", "we",
-            or "our"). Please read these Terms carefully before using our
-            Website and Services.
+          Willkommen bei Wunschlachen! Diese Nutzungsbedingungen ("Bedingungen") regeln Ihren Zugang und die Nutzung der Wunschlachen-Website ("Website") und Dienstleistungen ("Dienste") bereitgestellt von Wunschlachen, Inc. ("uns", "wir" oder "unser"). Bitte lesen Sie diese Bedingungen sorgfältig durch, bevor Sie unsere Website und Dienste nutzen.
           </p>
           <p>
-            By accessing and using our Website and Services, you agree to be
-            bound by these Terms. If you do not agree with any part of these
-            Terms, you must not use our Website and Services.
+          Durch den Zugriff auf und die Nutzung unserer Website und Dienste stimmen Sie zu, an diese Bedingungen gebunden zu sein. Wenn Sie mit einem Teil dieser Bedingungen nicht einverstanden sind, dürfen Sie unsere Website und Dienste nicht nutzen.
           </p>
 
-          <h2>Eligibility</h2>
+          <h2>Berechtigung</h2>
           <p>
-            By using our Website and Services, you represent and warrant that
-            you are at least 18 years old and have the legal capacity to enter
-            into and be bound by these Terms.
+          Durch die Nutzung unserer Website und Dienste versichern und garantieren Sie, dass Sie mindestens 18 Jahre alt sind und die rechtliche Fähigkeit haben, diese Bedingungen einzugehen und daran gebunden zu sein.
           </p>
-          <h2>Registration and Account</h2>
+          <h2>Registrierung und Konto</h2>
           <p>
-            To access certain features of our Website and Services, you may need
-            to create an account. You agree to provide accurate and complete
-            information when creating an account and to keep this information up
-            to date. You are responsible for maintaining the confidentiality of
-            your account password and for all activities that occur under your
-            account. You agree to notify us immediately if you suspect any
-            unauthorized access or use of your account.
+          Um auf bestimmte Funktionen unserer Website und Dienste zugreifen zu können, müssen Sie möglicherweise ein Konto erstellen. Sie stimmen zu, genaue und vollständige Informationen bei der Erstellung eines Kontos bereitzustellen und diese Informationen aktuell zu halten. Sie sind verantwortlich für die Wahrung der Vertraulichkeit Ihres Kontopassworts und für alle Aktivitäten, die unter Ihrem Konto stattfinden. Sie stimmen zu, uns sofort zu benachrichtigen, wenn Sie einen unbefugten Zugriff auf Ihr Konto oder die Nutzung Ihres Kontos vermuten.
           </p>
-          <h2>Use of Services</h2>
-          <p>By using our Services, you agree to:</p>
+          <h2>Nutzung der Dienste</h2>
+          <p>Durch die Nutzung unserer Dienste stimmen Sie zu:</p>
           <p>
-            Comply with all applicable laws, regulations, and these Terms Use
-            our Services only for your personal, non-commercial purposes Not use
-            our Services for any illegal or harmful activities Not interfere
-            with or disrupt the operation of our Services or the servers or
-            networks that host them AI Responsibility and User Decision Making
-            Our Services utilize Artificial Intelligence (AI) to generate data
-            and suggestions based on your preferences and the information you
-            provide. You understand and agree that the AI is not responsible for
-            results that are not reviewed, and that you, as the user, are the
-            final decision-maker in accepting or rejecting the AI-generated
-            data. You acknowledge that our Services are intended as a tool to
-            assist you, and that you bear the sole responsibility for reviewing,
-            interpreting, and relying on the AI-generated data.
+          Alle geltenden Gesetze, Vorschriften und diese Bedingungen einzuhalten Unsere Dienste nur für Ihre persönlichen, nicht-kommerziellen Zwecke zu nutzen Unsere Dienste nicht für illegale oder schädliche Aktivitäten zu nutzen Die Operation unserer Dienste oder der Server oder Netzwerke, die sie hosten, nicht zu stören oder zu unterbrechen KI-Verantwortung und Benutzerentscheidungsfindung Unsere Dienste nutzen Künstliche Intelligenz (KI), um Daten zu generieren und Vorschläge basierend auf Ihren Vorlieben und den Informationen, die Sie bereitstellen, zu machen. Sie verstehen und stimmen zu, dass die KI nicht für Ergebnisse verantwortlich ist, die nicht überprüft wurden, und dass Sie als Benutzer die endgültige Entscheidungsinstanz sind, ob Sie die von der KI generierten Daten akzeptieren oder ablehnen. Sie erkennen an, dass unsere Dienste als Hilfsmittel zur Unterstützung Ihnen dienen sollen, und dass Sie die alleinige Verantwortung für die Überprüfung, Interpretation und Nutzung der von der KI generierten Daten tragen.
           </p>
-          <h2>Intellectual Property</h2>
+          <h2>Geistiges Eigentum</h2>
           <p>
-            All content, features, and functionality on our Website and
-            Services, including but not limited to, text, graphics, logos,
-            icons, and software, are the exclusive property of Case Cruncher or
-            its licensors and are protected by copyright, trademark, and other
-            intellectual property laws. You may not reproduce, distribute,
-            modify, create derivative works from, or otherwise exploit any
-            content from our Website and Services without our prior written
-            consent.
+          Alle Inhalte, Funktionen und Funktionalitäten auf unserer Website und Diensten, einschließlich, aber nicht beschränkt auf, Text, Grafiken, Logos, Icons und Software, sind das exklusive Eigentum von Wunschlachen oder seinen Lizenzgebern und sind durch Urheberrecht, Markenrecht und andere Gesetze zum Schutz des geistigenEigentums geschützt. Sie dürfen ohne unsere vorherige schriftliche Zustimmung keinen Inhalt von unserer Website und Diensten reproduzieren, verteilen, modifizieren, abgeleitete Werke erstellen oder auf andere Weise ausnutzen.
           </p>
-          <h2>Termination</h2>
+          <h2>Kündigung</h2>
           <p>
-            We reserve the right to terminate or suspend your access to our
-            Website and Services, with or without notice, for any reason,
-            including but not limited to, your violation of these Terms or any
-            applicable law or regulation.
+          Wir behalten uns das Recht vor, Ihren Zugang zu unserer Website und Diensten mit oder ohne Vorankündigung aus irgendeinem Grund, einschließlich, aber nicht beschränkt auf, Ihre Verletzung dieser Bedingungen oder eines geltenden Gesetzes oder einer Verordnung, zu beenden oder auszusetzen.
           </p>
-          <h2>Disclaimer of Warranties</h2>
+          <h2>Haftungsbeschränkung</h2>
           <p>
-            Our Website and Services are provided on an "as is" and "as
-            available" basis. We make no warranties or representations, express
-            or implied, regarding the accuracy, reliability, completeness, or
-            timeliness of the AI-generated data or any other content on our
-            Website and Services. We disclaim all warranties, including but not
-            limited to, the implied warranties of merchantability, fitness for a
-            particular purpose, and non-infringement.
+          In keinem Fall haften Wunschlachen, seine Vorstandsmitglieder, Direktoren, Mitarbeiter oder Partner für direkte, indirekte, zufällige, besondere, Folge- oder Strafschäden, einschließlich, aber nicht beschränkt auf, Verlust von Gewinnen, Daten oder Nutzung, die aus oder im Zusammenhang mit Ihrer Nutzung unserer Website und Dienste entstehen, unabhängig davon, ob sie auf Gewährleistung, Vertrag, unerlaubter Handlung oder einer anderen Rechtstheorie beruhen, und unabhängig davon, ob wir auf die Möglichkeit solcher Schäden hingewiesen wurden.
           </p>
-          <h2>Limitation of Liability</h2>
+          <h2>Entschädigung</h2>
           <p>
-            In no event shall Case Cruncher, its officers, directors, employees,
-            or affiliates be liable for any direct, indirect, incidental,
-            special, consequential, or punitive damages, including but not
-            limited to, loss of profits, data, or use, arising out of or in
-            connection with your use of our Website and Services, whether based
-            on warranty, contract, tort, or any other legal theory, and whether
-            or not we have been advised of the possibility of such damages.
+          Sie stimmen zu, Wunschlachen, seine Vorstandsmitglieder, Direktoren, Mitarbeiter und Partner zu verteidigen, zu entschädigen und schadlos zu halten von und gegen alle Ansprüche, Schäden, Verpflichtungen, Verluste, Haftungen, Kosten und Ausgaben (einschließlich, aber nicht beschränkt auf Anwaltsgebühren), die aus folgenden Gründen entstehen:
           </p>
-          <h2>Indemnification</h2>
           <p>
-            You agree to defend, indemnify, and hold harmless Case Cruncher, its
-            officers, directors, employees, and affiliates from and against any
-            and all claims, damages, obligations, losses, liabilities, costs,
-            and expenses (including but not limited to attorney's fees) arising
-            from:
+          Ihre Nutzung und Zugang zu unserer Website und Diensten Ihre Verletzung eines Teils dieser Bedingungen Ihre Verletzung eines Rechts Dritter, einschließlich, aber nicht beschränkt auf Urheberrechte, Markenrechte, Eigentumsrechte oder Datenschutzrechte Jeder Anspruch, dass Ihre Nutzung unserer Dienste einem Dritten Schaden zugefügt hat Diese Entschädigungsverpflichtung wird die Beendigung dieser Bedingungen und Ihre Nutzung unserer Website und Dienste überdauern.
+          </p>
+          <h2>Änderungen an diesen Bedingungen</h2>
+          <p>
+          Wir können diese Bedingungen von Zeit zu Zeit aktualisieren. Wir werden Sie über Änderungen informieren, indem wir die neuen Bedingungen auf dieser Seite veröffentlichen. Sie werden dazu angehalten, diese Bedingungen regelmäßig auf Änderungen zu überprüfen. Durch die fortgesetzte Nutzung unserer Website und Dienste nach der Veröffentlichung der aktualisierten Bedingungen stimmen Sie zu, an die überarbeiteten Bedingungen gebunden zu sein.
           </p>
           <p>
             Your use of and access to our Website and Services Your violation of
@@ -123,31 +74,18 @@ const Terms = () => {
             to a third party This indemnification obligation will survive the
             termination of these Terms and your use of our Website and Services.
           </p>
-          <h2>Changes to These Terms</h2>
+          <h2>Anwendbares Recht und Gerichtsstand</h2>
           <p>
-            We may update these Terms from time to time. We will notify you of
-            any changes by posting the new Terms on this page. You are advised
-            to review these Terms periodically for any changes. By continuing to
-            use our Website and Services after the updated Terms have been
-            posted, you agree to be bound by the revised Terms.
+          Diese Bedingungen werden nach den Gesetzen der Vereinigten Staaten und dem Staat, in dem wir eingetragen sind, ohne Rücksicht auf seine Kollisionsnormen, ausgelegt und durchgesetzt. Sie stimmen zu, sich der persönlichen und exklusiven Gerichtsbarkeit der Gerichte in diesem Staat zu unterwerfen.
           </p>
-          <h2>Governing Law and Jurisdiction</h2>
+          <h2>Kontakt zu uns</h2>
           <p>
-            These Terms shall be governed by and construed in accordance with
-            the laws of the United States and the State in which we are
-            incorporated, without regard to its conflict of law provisions. You
-            agree to submit to the personal and exclusive jurisdiction of the
-            courts located within that State.
+          Wenn Sie Fragen oder Bedenken zu diesen Bedingungen haben, kontaktieren Sie uns bitte unter:
           </p>
-          <h2>Contacting us</h2>
-          <p>
-            If you have any questions or concerns about these Terms, please
-            contact us at:
-          </p>
-          <p>Case Cruncher</p>
+          <p>WunschlachenAI</p>
           <p>
             Email:{' '}
-            <a href="mailto:support@tailwindui.com">support@tailwindui.com</a>
+            <a href="mailto:martin.paetz@wunschlachen.de">martin.paetz@wunschlachen.de</a>
           </p>
         </div>
       </div>
@@ -156,3 +94,4 @@ const Terms = () => {
 };
 
 export default Terms;
+
