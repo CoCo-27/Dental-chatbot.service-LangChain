@@ -1,6 +1,39 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import { Spin, notification } from 'antd';
+import Loading from '../Icon/Loader';
 
 const ContactUs = () => {
+  const [loading, setLoading] = useState(false);
+  const form = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    emailjs
+      .sendForm(
+        'service_byox8ds',
+        'template_y682bhl',
+        form.current,
+        'XfKXY2hwb3gMYDYSs'
+      )
+      .then(() => {setLoading(false)
+      notification.success({
+        message: '',
+        description: 'Message sent successfully',
+        duration:2
+      })})
+      .catch((error) => {
+        console.log(error.text);
+        setLoading(false);
+        notification.error({
+          message: '',
+          description: 'Something went wrong',
+          duration: 2
+        })
+      });
+  };
   return (
     <div className="h-[calc(100vh-96px)] flex flex-col items-center justify-center bg-gray-100">
       <div
@@ -23,10 +56,10 @@ const ContactUs = () => {
           Contact us Now
         </div>
         <div className="mt-10">
-          <form action="#">
+          <form ref={form} onSubmit={handleSubmit}>
             <div className="flex flex-col mb-5">
               <label
-                htmlFor="email"
+                htmlFor="name"
                 className="mb-1 text-xs tracking-wide text-gray-600"
               >
                 Name:
@@ -49,9 +82,53 @@ const ContactUs = () => {
                 </div>
 
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
+                  id="name"
+                  type="text"
+                  name="name"
+                  className="
+                    text-sm
+                    placeholder-gray-500
+                    pl-10
+                    pr-4
+                    rounded-2xl
+                    border border-gray-400
+                    w-full
+                    py-2
+                    focus:outline-none focus:border-blue-400
+                  "
+                  placeholder="Enter your name"
+                />
+              </div>
+            </div>
+<div className="flex flex-col mb-5 hidden">
+              <label
+                htmlFor="to_name"
+                className="mb-1 text-xs tracking-wide text-gray-600"
+              >
+                Name:
+              </label>
+              <div className="relative">
+                <div
+                  className="
+                    inline-flex
+                    items-center
+                    justify-center
+                    absolute
+                    left-0
+                    top-0
+                    h-full
+                    w-10
+                    text-gray-400
+                  "
+                >
+                  <i className="fas fa-user text-blue-500"></i>
+                </div>
+
+                <input
+                  id="to_name"
+                  type="text"
+                  name="to_name"
+                  defaultValue={'Martin'}
                   className="
                     text-sm
                     placeholder-gray-500
@@ -88,7 +165,7 @@ const ContactUs = () => {
                     text-gray-400
                   "
                 >
-                  <i className="fas fa-at text-blue-500"></i>
+                  <i className="fas fa-user text-blue-500"></i>
                 </div>
 
                 <input
@@ -112,7 +189,7 @@ const ContactUs = () => {
             </div>
             <div className="flex flex-col mb-6">
               <label
-                htmlFor="password"
+                htmlFor="message"
                 className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
               >
                 Message:
@@ -176,20 +253,26 @@ const ContactUs = () => {
                   ease-in
                 "
               >
-                <span className="mr-2 uppercase">Contact Us</span>
-                <span>
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </span>
+                {!loading ? (
+                  <>
+                    <span className="mr-2 uppercase">Contact Us</span>
+                    <span>
+                      <svg
+                        className="h-6 w-6"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </span>
+                  </>
+                ) : (
+                  <Spin indicator={Loading} style={{ color: 'white' }} />
+                )}
               </button>
             </div>
           </form>
@@ -200,3 +283,4 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
