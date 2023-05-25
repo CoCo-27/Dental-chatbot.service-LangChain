@@ -9,7 +9,11 @@ const Chat = () => {
   const inputRef = useRef();
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState('');
-  const [array, setArray] = useState(JSON.parse(localStorage.getItem('chat_history')) ? JSON.parse(localStorage.getItem('chat_history')) : []);
+  const [array, setArray] = useState(
+    JSON.parse(localStorage.getItem('open_chat_history'))
+      ? JSON.parse(localStorage.getItem('open_chat_history'))
+      : []
+  );
   const [text, setText] = useState({
     data: '',
     type: false,
@@ -47,12 +51,13 @@ const Chat = () => {
         message: '',
         description: 'You have to register for more then one question',
         duration: 2,
-	style: {
-		width: 440,
-	}
+        style: {
+          width: 440,
+        },
       });
-	navigate('/login');
+      navigate('/login');
     } else {
+      // After press enter, the input value is initialized
       setFormValue('');
       const save = array.slice();
       save.push({ message: formValue, flag: false });
@@ -65,11 +70,15 @@ const Chat = () => {
           update[update.length - 1].message = res.data.text;
           update[update.length - 1].flag = true;
           setArray(update);
-          localStorage.setItem('chat_history', JSON.stringify(update));
-          localStorage.setItem('historyFlag', 'true');
+          localStorage.setItem('open_chat_history', JSON.stringify(update));
           setIsFree(isFree + 1);
         })
         .catch((err) => {
+          const update = save.slice();
+          update[update.length - 1].message =
+            'Please waitDental Assistant are not yet trained';
+          update[update.length - 1].flag = true;
+          setArray(update);
           notification.error({
             description: err.response.data.message,
             message: '',
@@ -80,12 +89,12 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex w-full min-w-min">
+    <div className="flex w-full min-w-[400px]">
       <div className="h-full flex flex-col flex-1 justify-between p-4 duration-500 overflow-hidden relative bg-white">
-        <div className="relative h-full flex flex-col">
+        <div className="relative h-[calc(100%-62px)] w-full">
           <div
             ref={req_qa_box}
-            className="relative flex w-full h-64 flex-grow flex-col rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] overflow-y-auto overflow-x-hidden"
+            className="relative flex w-full h-full flex-col p-3 rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] overflow-y-auto overflow-x-hidden"
           >
             {!isEmpty(array) ? (
               array.map((item, index) => {
@@ -99,12 +108,7 @@ const Chat = () => {
                 );
               })
             ) : (
-              <div className="mx-auto flex flex-col w-full space-y-5 md:space-y-10 px-3 pt-5 max-[650px]:pt-12">
-                <div className="text-center text-3xl font-semibold text-[#00185A] dark:text-gray-100 max-[555px]:text-xl transition-all">
-                  As a full service provider with state-of-the-art technology,
-                  we help you achieve your personal dream smile!
-                </div>
-              </div>
+              <></>
             )}
           </div>
         </div>

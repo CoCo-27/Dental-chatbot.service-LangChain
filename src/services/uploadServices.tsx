@@ -24,7 +24,12 @@ const embedding = (fileName, email) => {
 const requestMessage = (value, email) => {
   return axios.post(backend_api + 'upload/requestMessage', {
     value: value,
-    email: email,
+  });
+};
+
+const faqMessage = (value) => {
+  return axios.post(backend_api + 'upload/faqMessage', {
+    value: value,
   });
 };
 
@@ -33,6 +38,7 @@ const object = {
   getPrompt,
   embedding,
   requestMessage,
+  faqMessage,
 };
 
 export default object;
