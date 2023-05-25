@@ -14,6 +14,7 @@ import Privacy from './components/Footer/Privacy/Privacy';
 import Terms from './components/Footer/Terms/Terms';
 import Disclaimer from './components/Footer/Disclaimer/Disclaimer';
 import ContactUs from './components/ContactUs/ContactUs';
+import FAQChatbot from './pages/FAQChatbot/FAQChatbot';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/signUp',
     element: <SignUp />,
+  },
+  {
+    path: '/faq',
+    element: <FAQChatbot />,
   },
   {
     element: <Layout />,

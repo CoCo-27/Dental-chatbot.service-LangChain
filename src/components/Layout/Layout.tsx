@@ -20,6 +20,9 @@ const Layout = () => {
     case '/':
       isDashboard = 'home';
       break;
+    case '/faq':
+      isDashboard = 'faq';
+      break;
     default:
       isDashboard = 'other';
       break;

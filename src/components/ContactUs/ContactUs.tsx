@@ -18,20 +18,22 @@ const ContactUs = () => {
         form.current,
         'XfKXY2hwb3gMYDYSs'
       )
-      .then(() => {setLoading(false)
-      notification.success({
-        message: '',
-        description: 'Message sent successfully',
-        duration:2
-      })})
+      .then(() => {
+        setLoading(false);
+        notification.success({
+          message: '',
+          description: 'Message sent successfully',
+          duration: 2,
+        });
+      })
       .catch((error) => {
         console.log(error.text);
         setLoading(false);
         notification.error({
           message: '',
           description: 'Something went wrong',
-          duration: 2
-        })
+          duration: 2,
+        });
       });
   };
   return (
@@ -100,7 +102,7 @@ const ContactUs = () => {
                 />
               </div>
             </div>
-<div className="flex flex-col mb-5 hidden">
+            <div className="flex flex-col mb-5 hidden">
               <label
                 htmlFor="to_name"
                 className="mb-1 text-xs tracking-wide text-gray-600"
@@ -283,4 +285,3 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
-

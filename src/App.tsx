@@ -7,6 +7,19 @@ const App = () => {
     setAuthToken(localStorage.getItem('token'));
   }, []);
 
+  useEffect(() => {
+    if (window.location.pathname !== '/faq') {
+      const head = document.querySelector('head');
+      const script = document.createElement('script');
+
+      script.setAttribute('src', '//localhost:8081/widget.js');
+      head.appendChild(script);
+      return () => {
+        head.removeChild(script);
+      };
+    }
+  }, [window.location.pathname]);
+
   return (
     <div>
       <Router />
