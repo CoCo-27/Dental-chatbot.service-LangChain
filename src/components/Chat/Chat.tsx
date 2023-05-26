@@ -17,6 +17,7 @@ const Chat = () => {
             message:
               'Welcome to Dental Counselors for Immediate Implants! With this treatment method, you can have stable and new third teeth in just one day. Our practice in Berlin offers this service, and we are excited to share with you the requirements, course of treatment, and costs.',
             flag: true,
+            isButton: false,
           },
         ]
   );
@@ -33,8 +34,8 @@ const Chat = () => {
     if (!isEmpty(text.data)) {
       const save = array.slice();
       if (text.type === false) {
-        save.push({ message: text.data, flag: false });
-        save.push({ message: '...', flag: true });
+        save.push({ message: text.data, flag: false, isButton: false });
+        save.push({ message: '...', flag: true, isButton: false });
       } else {
         save[save.length - 1].message = text.data;
         save[save.length - 1].flag = true;
@@ -47,11 +48,12 @@ const Chat = () => {
 
   const handlePressEnter = (e) => {
     if (e.key === 'Enter' && formValue) {
-      handleMessage();
+      handleMessage('');
     }
   };
 
-  const handleMessage = async () => {
+  const handleMessage = async (isClicked) => {
+    req_qa_box.current.scrollTop = req_qa_box.current.scrollHeight;
     if (!localStorage.getItem('email') && isFree !== 1) {
       notification.warning({
         message: '',
@@ -66,15 +68,39 @@ const Chat = () => {
       // After press enter, the input value is initialized
       setFormValue('');
       const save = array.slice();
-      save.push({ message: formValue, flag: false });
+      save.push({
+        message: isClicked === '' ? formValue : isClicked,
+        flag: false,
+      });
       save.push({ message: '...', flag: true });
       setArray(save);
+      const data = {
+        value: isClicked === '' ? formValue : isClicked,
+        type: isClicked === '' ? false : true,
+      };
       uploadServices
-        .requestMessage(formValue, localStorage.getItem('email'))
+        .requestMessage(data)
         .then((res) => {
           const update = save.slice();
-          update[update.length - 1].message = res.data.text;
-          update[update.length - 1].flag = true;
+          if (res.data.type === false) {
+            const sentences = res.data.data.text.split('\n');
+            update[update.length - 1].message = sentences[0];
+            update[update.length - 1].flag = true;
+            update[update.length - 1].isButton = false;
+            sentences.map((item, index) => {
+              if (index >= 1 && item !== '' && item !== 'Similar questions:') {
+                update.push({
+                  message: sentences[index],
+                  flag: false,
+                  isButton: true,
+                });
+              }
+            });
+          } else {
+            update[update.length - 1].message = res.data.data.text;
+            update[update.length - 1].flag = true;
+            update[update.length - 1].isButton = false;
+          }
           setArray(update);
           localStorage.setItem('open_chat_history', JSON.stringify(update));
           setIsFree(isFree + 1);
@@ -100,7 +126,7 @@ const Chat = () => {
         <div className="relative h-[calc(100%-62px)] w-full">
           <div
             ref={req_qa_box}
-            className="relative flex w-full h-full flex-col p-3 rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] overflow-y-auto overflow-x-hidden"
+            className="relative flex w-full h-full flex-col space-y-4 p-3 rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] overflow-y-auto overflow-x-hidden"
           >
             {!isEmpty(array) ? (
               array.map((item, index) => {
@@ -110,6 +136,8 @@ const Chat = () => {
                     box_ref={req_qa_box}
                     message={item.message}
                     status={item.flag}
+                    isButton={item.isButton}
+                    onClick={handleMessage}
                   />
                 );
               })
@@ -136,7 +164,7 @@ const Chat = () => {
           <button
             className="absolute right-2 top-2 rounded-sm m-3 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900"
             disabled={formValue ? false : true}
-            onClick={() => handleMessage()}
+            onClick={() => handleMessage('')}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

@@ -64,7 +64,6 @@ const FAQChatbot = () => {
     uploadServices
       .faqMessage(data)
       .then((res) => {
-        console.log('!!!!!!!! = ', res);
         const update = save.slice();
         if (res.data.type === false) {
           const sentences = res.data.data.text.split('\n');
@@ -106,7 +105,7 @@ const FAQChatbot = () => {
       </div>
       <div
         ref={req_qa_box}
-        className="flex flex-col h-[calc(100vh-160px)] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch overflow-x-hidden"
+        className="relative w-full flex flex-col h-[calc(100vh-160px)] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch overflow-x-hidden"
       >
         {array &&
           array.map((item, index) => {
@@ -134,7 +133,7 @@ const FAQChatbot = () => {
             className="w-full focus:outline-none focus:placeholder-gray-400 text-black/20 rounded-md py-3 pl-4 pr-14 bg-gray-200"
             onKeyDown={(e) => handlePressEnter(e)}
           />
-          <div className="absolute right-0 items-center inset-y-0 flex">
+          <div className="absolute right-0 items-center inset-y-0 flex pr-1">
             <button
               className="inline-flex cursor-pointer items-center justify-center rounded-full w-7 h-7 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
               disabled={formValue ? false : true}
@@ -173,7 +172,7 @@ const FAQChatbot = () => {
                 ></path>
               </svg>
             </button> */}
-            <button
+            {/* <button
               type="button"
               className="inline-flex items-center justify-center rounded-full w-7 h-7 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
             >
@@ -191,7 +190,7 @@ const FAQChatbot = () => {
                   d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
