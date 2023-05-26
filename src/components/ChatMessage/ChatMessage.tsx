@@ -4,7 +4,7 @@ import url from '../../assets/img/human.svg';
 import TypeWriter from '../TextWriter/TextWriter';
 import './Message.css';
 
-const FAQChatMessage = (props) => {
+const ChatMessage = (props) => {
   useEffect(() => {
     props.box_ref.current.scrollTop = props.box_ref.current.scrollHeight;
   }, []);
@@ -74,4 +74,4 @@ const FAQChatMessage = (props) => {
   );
 };
 
-export default FAQChatMessage;
+export default ChatMessage;

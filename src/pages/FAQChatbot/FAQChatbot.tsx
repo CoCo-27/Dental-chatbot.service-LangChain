@@ -136,6 +136,25 @@ const FAQChatbot = () => {
           />
           <div className="absolute right-0 items-center inset-y-0 flex">
             <button
+              className="inline-flex cursor-pointer items-center justify-center rounded-full w-7 h-7 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+              disabled={formValue ? false : true}
+              onClick={() => handleMessage('')}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="tabler-icon tabler-icon-send h-5 w-5 text-gray-600"
+              >
+                <path d="M10 14l11 -11"></path>
+                <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
+              </svg>
+            </button>
+            {/* <button
               type="button"
               className="inline-flex items-center justify-center rounded-full w-7 h-7 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
             >
@@ -153,7 +172,7 @@ const FAQChatbot = () => {
                   d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
                 ></path>
               </svg>
-            </button>
+            </button> */}
             <button
               type="button"
               className="inline-flex items-center justify-center rounded-full w-7 h-7 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
