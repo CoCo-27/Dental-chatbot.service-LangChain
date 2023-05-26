@@ -15,7 +15,14 @@ const FAQChatbot = () => {
   const [array, setArray] = useState(
     JSON.parse(localStorage.getItem('faq_chat_history'))
       ? JSON.parse(localStorage.getItem('faq_chat_history'))
-      : []
+      : [
+          {
+            message:
+              'Welcome to Dental Counselors for Immediate Implants! With this treatment method, you can have stable and new third teeth in just one day. Our practice in Berlin offers this service, and we are excited to share with you the requirements, course of treatment, and costs.',
+            flag: true,
+            isButton: false,
+          },
+        ]
   );
 
   useEffect(() => {
@@ -23,8 +30,8 @@ const FAQChatbot = () => {
     if (!isEmpty(text.data)) {
       const save = array.slice();
       if (text.type === false) {
-        save.push({ message: text.data, flag: false });
-        save.push({ message: '...', flag: true });
+        save.push({ message: text.data, flag: false, isButton: false });
+        save.push({ message: '...', flag: true, isButton: false });
       } else {
         save[save.length - 1].message = text.data;
         save[save.length - 1].flag = true;
@@ -35,24 +42,49 @@ const FAQChatbot = () => {
 
   const handlePressEnter = (e) => {
     if (e.key === 'Enter' && formValue) {
-      handleMessage();
+      handleMessage('');
     }
   };
 
-  const handleMessage = async () => {
+  const handleMessage = async (isClicked) => {
+    req_qa_box.current.scrollTop = req_qa_box.current.scrollHeight;
     // After press enter, the input value is initialized
     setFormValue('');
     const save = array.slice();
-    save.push({ message: formValue, flag: false });
+    save.push({
+      message: isClicked === '' ? formValue : isClicked,
+      flag: false,
+    });
     save.push({ message: '...', flag: true });
     setArray(save);
+    const data = {
+      value: isClicked === '' ? formValue : isClicked,
+      type: isClicked === '' ? false : true,
+    };
     uploadServices
-      .faqMessage(formValue)
+      .faqMessage(data)
       .then((res) => {
+        console.log('!!!!!!!! = ', res);
         const update = save.slice();
-        update[update.length - 1].message = res.data.text;
-        update[update.length - 1].flag = true;
-        console.log('!!!!!!!! = ', update);
+        if (res.data.type === false) {
+          const sentences = res.data.data.text.split('\n');
+          update[update.length - 1].message = sentences[0];
+          update[update.length - 1].flag = true;
+          update[update.length - 1].isButton = false;
+          sentences.map((item, index) => {
+            if (index >= 1 && item !== '' && item !== 'Similar questions:') {
+              update.push({
+                message: sentences[index],
+                flag: false,
+                isButton: true,
+              });
+            }
+          });
+        } else {
+          update[update.length - 1].message = res.data.data.text;
+          update[update.length - 1].flag = true;
+          update[update.length - 1].isButton = false;
+        }
         setArray(update);
         localStorage.setItem('faq_chat_history', JSON.stringify(update));
       })
@@ -84,6 +116,8 @@ const FAQChatbot = () => {
                 box_ref={req_qa_box}
                 message={item.message}
                 status={item.flag}
+                isButton={item.isButton}
+                onClick={handleMessage}
               />
             );
           })}

@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { IconDental } from '@tabler/icons-react';
 import url from '../../assets/img/human.svg';
 import TypeWriter from '../TextWriter/TextWriter';
 import './Message.css';
 
 const FAQChatMessage = (props) => {
+  useEffect(() => {
+    props.box_ref.current.scrollTop = props.box_ref.current.scrollHeight;
+  }, []);
+
   return (
     <div
-      className={`flex items-end ${props.status === true ? '' : 'justify-end'}`}
+      className={`flex items-end pt-4 ${
+        props.status === true ? '' : 'justify-end'
+      }`}
     >
       {props.status === true ? (
         <div className="flex items-end">
-          <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start">
+          <div className="flex flex-col space-y-2 text-sm max-w-sm mx-2 order-2 items-start">
             <div>
               <span
                 className={`py-2 rounded-lg inline-block rounded-bl-none text-gray-800 ${
@@ -36,11 +42,13 @@ const FAQChatMessage = (props) => {
               </span>
             </div>
           </div>
-          <IconDental size={36} strokeWidth={1} />
+          <div className="w-8 h-9 rounded-full order-1">
+            <IconDental size={36} strokeWidth={1} />
+          </div>
         </div>
       ) : (
         <div className="flex items-end justify-end">
-          <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-1 items-end">
+          <div className="flex flex-col space-y-2 text-sm max-w-sm mx-2 order-1 items-end">
             <div>
               <span className="px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white ">
                 {props.status === true ? (
