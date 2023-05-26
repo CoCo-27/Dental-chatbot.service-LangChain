@@ -64,7 +64,6 @@ const FAQChatbot = () => {
     uploadServices
       .faqMessage(data)
       .then((res) => {
-        console.log('!!!!!!!! = ', res);
         const update = save.slice();
         if (res.data.type === false) {
           const sentences = res.data.data.text.split('\n');
@@ -106,7 +105,7 @@ const FAQChatbot = () => {
       </div>
       <div
         ref={req_qa_box}
-        className="flex flex-col h-[calc(100vh-160px)] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch overflow-x-hidden"
+        className="relative w-full flex flex-col h-[calc(100vh-160px)] space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch overflow-x-hidden"
       >
         {array &&
           array.map((item, index) => {

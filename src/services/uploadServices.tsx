@@ -21,10 +21,8 @@ const embedding = (fileName, email) => {
   });
 };
 
-const requestMessage = (value, email) => {
-  return axios.post(backend_api + 'upload/requestMessage', {
-    value: value,
-  });
+const requestMessage = (value) => {
+  return axios.post(backend_api + 'upload/requestMessage', value);
 };
 
 const faqMessage = (value) => {
