@@ -12,7 +12,13 @@ const Chat = () => {
   const [array, setArray] = useState(
     JSON.parse(localStorage.getItem('open_chat_history'))
       ? JSON.parse(localStorage.getItem('open_chat_history'))
-      : []
+      : [
+          {
+            message:
+              'Welcome to Dental Counselors for Immediate Implants! With this treatment method, you can have stable and new third teeth in just one day. Our practice in Berlin offers this service, and we are excited to share with you the requirements, course of treatment, and costs.',
+            flag: true,
+          },
+        ]
   );
   const [text, setText] = useState({
     data: '',

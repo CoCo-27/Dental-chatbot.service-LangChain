@@ -28,9 +28,7 @@ const requestMessage = (value, email) => {
 };
 
 const faqMessage = (value) => {
-  return axios.post(backend_api + 'upload/faqMessage', {
-    value: value,
-  });
+  return axios.post(backend_api + 'upload/faqMessage', value);
 };
 
 const object = {
