@@ -6,7 +6,7 @@ Dental_Assistant_Client
 
 As a full service provider with state-of-the-art technology, we help you achieve your personal dream smile!
 
-## Getting Started
+## Getting Started on your Local
 
 ### Installing
 
@@ -15,9 +15,9 @@ Make sure you have [nvm] installed (prefer: node >= 16)
 Just run the following command at the root of your project
 
 ```sh
-npm install
+npm i
 ```
-
+OR
 ```sh
 yarn install
 ```
