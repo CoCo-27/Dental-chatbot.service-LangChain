@@ -1,8 +1,8 @@
 import axios from 'axios';
 import backend_api from 'src/config';
 
-const getHistory = (value) => {
-  return axios.post(backend_api + 'history/get', { email: value });
+const getHistory = () => {
+  return axios.get(backend_api + 'history/get');
 };
 
 const addQuestion = (value) => {
