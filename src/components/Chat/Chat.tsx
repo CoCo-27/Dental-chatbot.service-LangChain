@@ -21,6 +21,11 @@ const Chat = () => {
           },
         ]
   );
+  const [history, setHistory] = useState(
+    JSON.parse(localStorage.getItem('chat_history'))
+      ? JSON.parse(localStorage.getItem('chat_history'))
+      : []
+  );
   const [text, setText] = useState({
     data: '',
     type: false,
@@ -68,47 +73,67 @@ const Chat = () => {
       // After press enter, the input value is initialized
       setFormValue('');
       const save = array.slice();
+      const save_history = history.slice();
       save.push({
         message: isClicked === '' ? formValue : isClicked,
         flag: false,
       });
       save.push({ message: '...', flag: true });
+      save_history.push([isClicked === '' ? formValue : isClicked, '...']);
       setArray(save);
+      setHistory(save_history);
       const data = {
         value: isClicked === '' ? formValue : isClicked,
         type: isClicked === '' ? false : true,
+        history: save_history,
+        email: localStorage.getItem('email')
+          ? localStorage.getItem('email')
+          : 'nothing',
       };
       uploadServices
         .requestMessage(data)
         .then((res) => {
           const update = save.slice();
           if (res.data.type === false) {
-            const sentences = res.data.data.text.split('\n');
+            const sentences = res.data.data.text.split('!@#$%^&*())(*&^%$#@!');
+            console.log('senectences = ', sentences[0]);
+            const questions = sentences[1].split('\n');
+            console.log('questions = ', questions);
+            save_history[save_history.length - 1][1] = sentences[0];
             update[update.length - 1].message = sentences[0];
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
-            sentences.map((item, index) => {
-              if (index >= 1 && item !== '' && item !== 'Similar questions:') {
+            questions.map((item, index) => {
+              if (index > 1) {
                 update.push({
-                  message: sentences[index],
+                  message: questions[index],
                   flag: false,
                   isButton: true,
                 });
               }
             });
           } else {
+            save_history[save_history.length - 1][1] = res.data.data.text;
             update[update.length - 1].message = res.data.data.text;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
           }
+          const limitHistory =
+            save_history.length > 6
+              ? save_history.shift()
+              : save_history.slice();
+          console.log('$$$$$$$$$$$$ = ', save_history.length, limitHistory);
+          setHistory(limitHistory);
+          localStorage.setItem('chat_history', JSON.stringify(limitHistory));
           setArray(update);
           localStorage.setItem('open_chat_history', JSON.stringify(update));
           setIsFree(isFree + 1);
         })
         .catch((err) => {
+          console.log(err);
           const update = save.slice();
           update[update.length - 1].message =
-            'Please waitDental Assistant are not yet trained';
+            'Please wait. Dental Assistant are not yet trained';
           update[update.length - 1].flag = true;
           setArray(update);
           notification.error({
@@ -131,14 +156,16 @@ const Chat = () => {
             {!isEmpty(array) ? (
               array.map((item, index) => {
                 return (
-                  <ChatMessage
-                    key={index}
-                    box_ref={req_qa_box}
-                    message={item.message}
-                    status={item.flag}
-                    isButton={item.isButton}
-                    onClick={handleMessage}
-                  />
+                  <div key={index}>
+                    <ChatMessage
+                      index={index}
+                      box_ref={req_qa_box}
+                      message={item.message}
+                      status={item.flag}
+                      isButton={item.isButton}
+                      onClick={handleMessage}
+                    />
+                  </div>
                 );
               })
             ) : (
@@ -162,7 +189,7 @@ const Chat = () => {
             onKeyDown={(e) => handlePressEnter(e)}
           />
           <button
-            className="absolute right-2 top-2 rounded-sm m-3 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900"
+            className="inline-flex cursor-pointer items-center justify-center rounded-full w-7 h-7 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
             disabled={formValue ? false : true}
             onClick={() => handleMessage('')}
           >
