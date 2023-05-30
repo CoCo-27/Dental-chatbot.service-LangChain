@@ -23,7 +23,6 @@ const ChatMessage = (props) => {
       const data = {
         value: JSON.parse(localStorage.getItem('open_chat_history'))[index - 1]
           .message,
-        email: localStorage.getItem('email'),
         rating: type,
       };
       historyServices
