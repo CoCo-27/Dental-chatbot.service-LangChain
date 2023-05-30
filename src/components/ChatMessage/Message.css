@@ -6,7 +6,8 @@
 .spinner > div {
   width: 8px;
   height: 8px;
-  background-color: rgb(1 96 153);
+  gap: 2px;
+  background-color: rgb(255, 255, 255);
 
   border-radius: 100%;
   display: inline-block;
@@ -45,5 +46,31 @@
   40% {
     -webkit-transform: scale(1);
     transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fade-in 2s ease-in-out forwards;
+}
+
+.fade-out {
+  animation: fade-out 2s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
