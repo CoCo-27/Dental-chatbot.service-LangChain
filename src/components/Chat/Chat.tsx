@@ -73,7 +73,7 @@ const Chat = () => {
       // After press enter, the input value is initialized
       setFormValue('');
       const save = array.slice();
-      const save_history = history.slice();
+      const save_history = history;
       save.push({
         message: isClicked === '' ? formValue : isClicked,
         flag: false,
@@ -96,9 +96,7 @@ const Chat = () => {
           const update = save.slice();
           if (res.data.type === false) {
             const sentences = res.data.data.text.split('!@#$%^&*())(*&^%$#@!');
-            console.log('senectences = ', sentences[0]);
             const questions = sentences[1].split('\n');
-            console.log('questions = ', questions);
             save_history[save_history.length - 1][1] = sentences[0];
             update[update.length - 1].message = sentences[0];
             update[update.length - 1].flag = true;
@@ -122,7 +120,6 @@ const Chat = () => {
             save_history.length > 6
               ? save_history.shift()
               : save_history.slice();
-          console.log('$$$$$$$$$$$$ = ', save_history.length, limitHistory);
           setHistory(limitHistory);
           localStorage.setItem('chat_history', JSON.stringify(limitHistory));
           setArray(update);
