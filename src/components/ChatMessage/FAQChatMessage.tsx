@@ -45,7 +45,7 @@ const FAQChatMessage = (props) => {
           </div>
         </div>
       ) : (
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-end">
           <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-1 items-end">
             <div>
               {props.isButton === true ? (

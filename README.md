@@ -17,7 +17,9 @@ Just run the following command at the root of your project
 ```sh
 npm i
 ```
+
 OR
+
 ```sh
 yarn install
 ```
