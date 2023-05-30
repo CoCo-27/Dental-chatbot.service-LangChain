@@ -9,10 +9,18 @@ const ChatMessage = (props) => {
   const [suggestion, setSuggestion] = useState(false);
   const [dislike, setDislike] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     props.box_ref.current.scrollTop = props.box_ref.current.scrollHeight;
-  }, []);
+  }, [props.message]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  });
 
   const handleRating = async (index, type) => {
     if (disable !== true) {
@@ -43,27 +51,33 @@ const ChatMessage = (props) => {
           <div className="w-8 h-9 rounded-full order-1">
             <IconDental size={36} strokeWidth={1} />
           </div>
-          <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-1 items-start">
+          <div className="flex flex-col space-y-2 text-sm max-w-xl mx-2 order-1 items-start">
             <div>
               <span
-                className={`py-2 rounded-lg inline-block rounded-bl-none text-gray-800 ${
-                  props.message === '...' ? 'bg-white' : 'bg-gray-300 px-4'
+                className={`py-4 rounded-lg inline-block rounded-bl-none text-white text-base bg-[#84909d] ${
+                  props.message === '...' ? '' : 'px-4'
                 }`}
               >
                 {props.message === '...' ? (
-                  <div className="spinner">
-                    <div className="bounce1"></div>
-                    <div className="bounce2"></div>
-                    <div className="bounce3"></div>
+                  <div className={`flex flex-row ${isVisible ? 'pr-6' : ''}`}>
+                    <div className="spinner">
+                      <div className="bounce1"></div>
+                      <div className="bounce2"></div>
+                      <div className="bounce3"></div>
+                    </div>
+                    {isVisible && (
+                      <p className={isVisible ? 'fade-in' : 'fade-out'}>
+                        Give me just a moment
+                      </p>
+                    )}
+                    {/* <>
+                      {setTimeout(() => {
+                        <p>Give me just a moment</p>;
+                      }, 2000)}
+                    </> */}
                   </div>
-                ) : props.status === true ? (
-                  <TypeWriter
-                    content={props.message}
-                    speed={15}
-                    box_ref={props.box_ref}
-                  />
                 ) : (
-                  <p>{props.message}</p>
+                  props.message
                 )}
               </span>
             </div>
@@ -107,28 +121,20 @@ const ChatMessage = (props) => {
         </div>
       ) : (
         <div className="flex justify-end items-end">
-          <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-1 items-end">
+          <div className="flex flex-col space-y-2 text-sm max-w-xl mx-2 order-1 items-end">
             <div>
               {props.isButton === true ? (
                 <button
-                  className="bg-transparent hover:bg-blue-600 text-blue-700 font-semibold hover:text-white p-2 text-sm border border-blue-500 hover:border-transparent rounded"
+                  className="bg-transparent hover:bg-blue-600 text-blue-700 font-semibold hover:text-white p-2 text-base border border-blue-500 hover:border-transparent rounded"
                   onClick={() => props.onClick(props.message)}
                 >
                   {props.message}
                 </button>
               ) : (
                 <div
-                  className={`rounded-lg inline-block rounded-br-none bg-blue-600 text-white px-4 py-2`}
+                  className={`rounded-lg inline-block rounded-br-none bg-blue-600 text-white text-base p-4`}
                 >
-                  {props.status === true ? (
-                    <TypeWriter
-                      content={props.message}
-                      speed={15}
-                      box_ref={props.box_ref}
-                    />
-                  ) : (
-                    <p>{props.message}</p>
-                  )}
+                  {props.message}
                 </div>
               )}
             </div>

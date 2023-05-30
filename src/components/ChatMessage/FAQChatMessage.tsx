@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { IconDental } from '@tabler/icons-react';
 import url from '../../assets/img/human.svg';
-import TypeWriter from '../TextWriter/TextWriter';
 import './Message.css';
 
 const FAQChatMessage = (props) => {
   useEffect(() => {
     props.box_ref.current.scrollTop = props.box_ref.current.scrollHeight;
-  }, []);
+  }, [props.message]);
 
   return (
     <div
@@ -18,8 +17,8 @@ const FAQChatMessage = (props) => {
           <div className="flex flex-col space-y-2 text-sm max-w-xs mx-2 order-2 items-start">
             <div>
               <span
-                className={`py-2 rounded-lg inline-block rounded-bl-none text-gray-800 ${
-                  props.message === '...' ? 'bg-white' : 'bg-gray-300 px-4'
+                className={`py-2 rounded-lg inline-block rounded-bl-none text-white text-base bg-[#84909d] ${
+                  props.message === '...' ? '' : 'px-4'
                 }`}
               >
                 {props.message === '...' ? (
@@ -28,14 +27,8 @@ const FAQChatMessage = (props) => {
                     <div className="bounce2"></div>
                     <div className="bounce3"></div>
                   </div>
-                ) : props.status === true ? (
-                  <TypeWriter
-                    content={props.message}
-                    speed={10}
-                    box_ref={props.box_ref}
-                  />
                 ) : (
-                  <p>{props.message}</p>
+                  props.message
                 )}
               </span>
             </div>
@@ -57,17 +50,9 @@ const FAQChatMessage = (props) => {
                 </button>
               ) : (
                 <div
-                  className={`rounded-lg inline-block rounded-br-none bg-blue-600 text-white px-4 py-2`}
+                  className={`rounded-lg inline-block rounded-br-none bg-blue-600 text-white text-base px-4 py-2`}
                 >
-                  {props.status === true ? (
-                    <TypeWriter
-                      content={props.message}
-                      speed={10}
-                      box_ref={props.box_ref}
-                    />
-                  ) : (
-                    <p>{props.message}</p>
-                  )}
+                  {props.message}
                 </div>
               )}
             </div>
