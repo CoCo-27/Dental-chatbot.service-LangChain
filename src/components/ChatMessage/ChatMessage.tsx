@@ -45,7 +45,7 @@ const ChatMessage = (props) => {
     >
       {props.status === true ? (
         <div className="flex items-start group answer-in">
-          <div className="flex items-center justify-center pt-1 px-1 xl:px-0 w-[40px] h-[40px] text-white text-xl rounded-full order-1 bg-[#84909d]">
+          <div className="flex items-center justify-center px-1 xl:px-0 w-[40px] h-[40px] text-white text-xl rounded-full order-1 bg-[#84909d]">
             Da.
           </div>
           <div className="flex flex-row space-y-2 text-sm max-w-xl mx-2 order-1 items-start">
