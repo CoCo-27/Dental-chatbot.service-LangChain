@@ -64,6 +64,7 @@ const FAQChatbot = () => {
     uploadServices
       .faqMessage(data)
       .then((res) => {
+        console.log(res.data.data.text);
         const update = save.slice();
         if (res.data.type === false) {
           const sentences = res.data.data.text.split('!@#$%^&*())(*&^%$#@!');
@@ -77,7 +78,7 @@ const FAQChatbot = () => {
           update[update.length - 1].flag = true;
           update[update.length - 1].isButton = false;
           questions.map((item, index) => {
-            if (index >= 1) {
+            if (index > 1) {
               update.push({
                 message: item.replace(/[0-9]/g, '').replace('.', ''),
                 flag: false,
