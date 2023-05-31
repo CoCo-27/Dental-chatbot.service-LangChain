@@ -66,14 +66,20 @@ const FAQChatbot = () => {
       .then((res) => {
         const update = save.slice();
         if (res.data.type === false) {
-          const sentences = res.data.data.text.split('\n');
-          update[update.length - 1].message = sentences[0];
+          const sentences = res.data.data.text.split('!@#$%^&*())(*&^%$#@!');
+          const answer =
+            sentences[0].search('Answer:') === -1
+              ? sentences[0]
+              : sentences[0].split('Answer:')[1];
+          const questions = sentences[1].split('\n');
+
+          update[update.length - 1].message = answer;
           update[update.length - 1].flag = true;
           update[update.length - 1].isButton = false;
-          sentences.map((item, index) => {
-            if (index >= 1 && item !== '' && item !== 'Similar questions:') {
+          questions.map((item, index) => {
+            if (index >= 1) {
               update.push({
-                message: sentences[index],
+                message: item.replace(/[0-9]/g, '').replace('.', ''),
                 flag: false,
                 isButton: true,
               });
