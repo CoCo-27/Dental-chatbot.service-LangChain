@@ -108,7 +108,7 @@ const Chat = () => {
             questions.map((item, index) => {
               if (index > 1) {
                 update.push({
-                  message: questions[index],
+                  message: item.replace(/[0-9]/g, '').replace('.', ''),
                   flag: false,
                   isButton: true,
                 });
@@ -178,7 +178,7 @@ const Chat = () => {
         <div className="relative flex w-full flex-row py-2 px-4 gap-4 justify-center items-center rounded-md ">
           <input
             ref={inputRef}
-            className="m-0 w-10/12 rounded resize-none border border-black/20 overflow-hidden bg-transparent text-black hover:border-[#1976d2] dark:bg-transparent dark:text-white md:py-2 md:pl-4"
+            className="m-0 w-10/12 rounded resize-none border border-black/20 overflow-hidden bg-transparent text-black hover:border-[#1976d2] dark:bg-transparent dark:text-white py-2 pl-4"
             value={formValue}
             required
             placeholder="Type a message ..."
