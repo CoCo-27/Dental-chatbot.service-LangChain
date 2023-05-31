@@ -21,7 +21,7 @@ const FAQChatMessage = (props) => {
     >
       {props.status === true ? (
         <div className="flex items-start group answer-in">
-          <div className="flex items-center justify-center pt-1 px-1 xl:px-0 w-[40px] h-[40px] text-white text-xl rounded-full order-1 bg-[#84909d]">
+          <div className="flex items-center justify-center px-1 xl:px-0 w-[40px] h-[40px] text-white text-xl rounded-full order-1 bg-[#84909d]">
             Da.
           </div>
           <div className="flex flex-row space-y-2 text-sm max-w-xl mx-2 order-1 items-start">
@@ -106,53 +106,15 @@ const FAQChatMessage = (props) => {
           {props.isButton === true ? (
             <></>
           ) : (
-            <>
-              <div className="relative top-[-2px] right-[21px] order-1">
-                <svg
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  width="30px"
-                  height="30px"
-                  viewBox="0,0,256,256"
-                >
-                  <g
-                    fill="#1976d2"
-                    fillRule="nonzero"
-                    stroke="none"
-                    strokeWidth="1"
-                    strokeLinecap="butt"
-                    strokeLinejoin="miter"
-                    strokeMiterlimit="10"
-                    strokeDasharray=""
-                    strokeDashoffset="0"
-                    fontFamily="none"
-                    fontWeight="none"
-                    fontSize="none"
-                    textAnchor="none"
-                    style={{ mixBlendMode: 'normal' }}
-                  >
-                    <g transform="translate(9.55083,234.24707) rotate(-90) scale(10.66667,10.66667)">
-                      <path d="M4,9l8,8l8,-8z"></path>
-                    </g>
-                  </g>
-                </svg>
-              </div>
-              <div className="bg-[#1976d2] w-[40px] h-[40px] flex items-center rounded-full order-2 p-1">
-                <svg
-                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-13y7ul3"
-                  focusable="false"
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  data-testid="PersonIcon"
-                >
-                  <path
-                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
-                    fill="white"
-                  ></path>
-                </svg>
-              </div>
-            </>
+            <svg
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-13y7ul3"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="PersonIcon"
+            >
+              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+            </svg>
           )}
         </div>
       )}
