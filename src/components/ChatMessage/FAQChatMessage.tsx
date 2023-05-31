@@ -24,7 +24,7 @@ const FAQChatMessage = (props) => {
           <div className="flex items-center justify-center px-1 xl:px-0 w-[40px] h-[40px] text-white text-xl rounded-full order-1 bg-[#84909d]">
             Da.
           </div>
-          <div className="flex flex-row space-y-2 text-sm max-w-xl mx-2 order-1 items-start">
+          <div className="flex flex-row space-y-2 max-w-xl mx-2 order-1 items-start">
             <div className="relative top-[16px] left-[15px]">
               <svg
                 version="1.1"
@@ -58,8 +58,8 @@ const FAQChatMessage = (props) => {
             </div>
             <div>
               <span
-                className={`py-4 rounded-lg inline-block text-white text-base bg-[#84909d] ${
-                  props.message === '...' ? '' : 'px-4'
+                className={`py-2 rounded-lg inline-block text-white text-base bg-[#84909d] ${
+                  props.message === '...' ? '' : 'px-2'
                 }`}
               >
                 {props.message === '...' ? (
@@ -88,14 +88,14 @@ const FAQChatMessage = (props) => {
             <div>
               {props.isButton === true ? (
                 <button
-                  className="bg-transparent text-[#1976d2] font-semibold rounded py-2 px-4 text-base border border-[#1976d280] border-solid hover:border-[#1976d2] hover:bg-[#1976d20a]"
+                  className="bg-transparent text-[#1976d2] font-semibold rounded py-1 px-2 text-sm border border-[#1976d280] border-solid hover:border-[#1976d2] hover:bg-[#1976d20a]"
                   onClick={() => props.onClick(props.message)}
                 >
                   {props.message}
                 </button>
               ) : (
                 <div
-                  className={`rounded-lg inline-block bg-[#1976d2] text-white text-base p-4`}
+                  className={`rounded-lg inline-block bg-[#1976d2] text-white text-base p-2`}
                 >
                   {props.message}
                 </div>
@@ -138,12 +138,14 @@ const FAQChatMessage = (props) => {
                   </g>
                 </svg>
               </div>
-              <div className="bg-[#1976d2] w-[56px] h-[40px] flex justify-center items-center rounded-full order-2 p-1">
+              <div className="bg-[#1976d2] flex justify-center items-center rounded-full order-2 p-1">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-13y7ul3"
                   focusable="false"
                   aria-hidden="true"
                   viewBox="0 0 24 24"
+                  width={'30px'}
+                  height={'30px'}
                   data-testid="PersonIcon"
                 >
                   <path
