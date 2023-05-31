@@ -21,11 +21,11 @@ const Chat = () => {
           },
         ]
   );
-  const [history, setHistory] = useState(
-    JSON.parse(localStorage.getItem('chat_history'))
-      ? JSON.parse(localStorage.getItem('chat_history'))
-      : []
-  );
+  // const [history, setHistory] = useState(
+  //   JSON.parse(localStorage.getItem('chat_history'))
+  //     ? JSON.parse(localStorage.getItem('chat_history')) || []
+  //     : []
+  // );
   const [text, setText] = useState({
     data: '',
     type: false,
@@ -73,19 +73,19 @@ const Chat = () => {
       // After press enter, the input value is initialized
       setFormValue('');
       const save = array.slice();
-      const save_history = history;
+      // const save_history = history;
       save.push({
         message: isClicked === '' ? formValue : isClicked,
         flag: false,
       });
       save.push({ message: '...', flag: true });
-      save_history.push([isClicked === '' ? formValue : isClicked, '...']);
+      // save_history.push([isClicked === '' ? formValue : isClicked, '...']);
       setArray(save);
-      setHistory(save_history);
+      // setHistory(save_history);
       const data = {
         value: isClicked === '' ? formValue : isClicked,
         type: isClicked === '' ? false : true,
-        history: save_history,
+        // history: save_history,
         email: localStorage.getItem('email')
           ? localStorage.getItem('email')
           : 'nothing',
@@ -101,7 +101,7 @@ const Chat = () => {
                 ? sentences[0]
                 : sentences[0].split('Answer:')[1];
             const questions = sentences[1].split('\n');
-            save_history[save_history.length - 1][1] = answer;
+            // save_history[save_history.length - 1][1] = answer;
             update[update.length - 1].message = answer;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
@@ -115,17 +115,17 @@ const Chat = () => {
               }
             });
           } else {
-            save_history[save_history.length - 1][1] = res.data.data.text;
+            // save_history[save_history.length - 1][1] = res.data.data.text;
             update[update.length - 1].message = res.data.data.text;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
           }
-          const limitHistory =
-            save_history.length > 6
-              ? save_history.shift()
-              : save_history.slice();
-          setHistory(limitHistory);
-          localStorage.setItem('chat_history', JSON.stringify(limitHistory));
+          // const limitHistory =
+          //   save_history.length > 6
+          //     ? save_history.shift()
+          //     : save_history.slice();
+          // setHistory(limitHistory);
+          // localStorage.setItem('chat_history', JSON.stringify(limitHistory));
           setArray(update);
           localStorage.setItem('open_chat_history', JSON.stringify(update));
           setIsFree(isFree + 1);
