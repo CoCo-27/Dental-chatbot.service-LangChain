@@ -65,7 +65,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
   return (
     <Menu>
       <div
-        className={`w-full flex text-navy-700 items-center font-semibold justify-between bg-gradient-to-r from-[#f5f5f5] to-teal-100 shadow-md z-10 px-3 transition-all duration-300 h-[90px]
+        className={`fixed w-full flex text-navy-700 items-center font-semibold justify-between bg-gradient-to-r from-[#f5f5f5] to-teal-100 shadow-md z-50 px-3 transition-all duration-300 h-[90px]
 			`}
       >
         <img
@@ -103,7 +103,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
 
                 {logFlag === 'true' ? (
                   <button
-                    className={` ml-10 mr-5 flex w-44 rounded-lg bg-[#0071b2] p-3 py-3 px-6 text-lg text-white font-semibold text-txGray shadow-sm hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.3),0_4px_18px_0_rgba(51,45,45,0.2)] lg:ml-32 xl:my-auto xl:ml-0 justify-center`}
+                    className={` ml-10 mr-5 flex w-44 rounded-lg bg-[#1976d2] p-3 py-3 px-6 text-lg text-white font-semibold text-txGray shadow-sm hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.3),0_4px_18px_0_rgba(51,45,45,0.2)] lg:ml-32 xl:my-auto xl:ml-0 justify-center`}
                     onClick={() => handleGoPage('logOut')}
                   >
                     <svg
@@ -121,7 +121,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
                   </button>
                 ) : (
                   <button
-                    className={` ml-10 mr-5 flex w-44 rounded-lg bg-[#0071b2] p-3 py-3 px-6 text-lg text-white font-semibold text-txGray shadow-sm hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.3),0_4px_18px_0_rgba(51,45,45,0.2)] lg:ml-32 xl:my-auto xl:ml-0 justify-center`}
+                    className={` ml-10 mr-5 flex w-44 rounded-lg bg-[#1976d2] p-3 py-3 px-6 text-lg text-white font-semibold text-txGray shadow-sm hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.3),0_4px_18px_0_rgba(51,45,45,0.2)] lg:ml-32 xl:my-auto xl:ml-0 justify-center`}
                     onClick={() => handleGoPage('login')}
                   >
                     <svg
