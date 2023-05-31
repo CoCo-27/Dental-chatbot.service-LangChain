@@ -96,9 +96,13 @@ const Chat = () => {
           const update = save.slice();
           if (res.data.type === false) {
             const sentences = res.data.data.text.split('!@#$%^&*())(*&^%$#@!');
+            const answer =
+              sentences[0].search('Answer:') === -1
+                ? sentences[0]
+                : sentences[0].split('Answer:')[1];
             const questions = sentences[1].split('\n');
-            save_history[save_history.length - 1][1] = sentences[0];
-            update[update.length - 1].message = sentences[0];
+            save_history[save_history.length - 1][1] = answer;
+            update[update.length - 1].message = answer;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
             questions.map((item, index) => {
@@ -144,11 +148,11 @@ const Chat = () => {
 
   return (
     <div className="flex w-full min-w-[400px]">
-      <div className="h-full flex flex-col flex-1 justify-between p-4 duration-500 overflow-hidden relative bg-white">
+      <div className="h-full flex flex-col flex-1 justify-between duration-500 overflow-hidden relative bg-white">
         <div className="relative h-[calc(100%-62px)] w-full">
           <div
             ref={req_qa_box}
-            className="relative flex w-full h-full flex-col space-y-4 p-3 rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] overflow-y-auto overflow-x-hidden"
+            className="relative flex w-full h-full flex-col space-y-4 p-8 rounded-md bg-white overflow-y-auto overflow-x-hidden"
           >
             {!isEmpty(array) ? (
               array.map((item, index) => {
@@ -171,10 +175,10 @@ const Chat = () => {
           </div>
         </div>
 
-        <div className="relative flex w-full flex-row mt-4 p-2 justify-center items-center rounded-md border border-black/10 bg-white shadow-[0_0_10px_rgba(0,0,0,0.10)] ">
+        <div className="relative flex w-full flex-row py-2 px-4 gap-4 justify-center items-center rounded-md ">
           <input
             ref={inputRef}
-            className="m-0 w-full resize-none border-0 overflow-hidden bg-transparent py-2 pl-4 pr-8 text-black dark:bg-transparent dark:text-white md:py-2 md:pl-4"
+            className="m-0 w-10/12 rounded resize-none border border-black/20 overflow-hidden bg-transparent text-black hover:border-[#1976d2] dark:bg-transparent dark:text-white md:py-2 md:pl-4"
             value={formValue}
             required
             placeholder="Type a message ..."
@@ -186,24 +190,23 @@ const Chat = () => {
             onKeyDown={(e) => handlePressEnter(e)}
           />
           <button
-            className="inline-flex cursor-pointer items-center justify-center rounded-full w-7 h-7 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+            className="bg-[#1565c0] hover:bg-[#1565c0] text-white px-4 py-1 font-bold gap-4 rounded inline-flex cursor-pointer items-center justify-center w-2/12 h-full transition duration-500 ease-in-out focus:outline-none"
             disabled={formValue ? false : true}
             onClick={() => handleMessage('')}
           >
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-vubbuv"
+              focusable="false"
+              aria-hidden="true"
               viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="tabler-icon tabler-icon-send"
+              width={'1.5em'}
+              height={'1.5em'}
+              data-testid="SendIcon"
             >
-              <path d="M10 14l11 -11"></path>
-              <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5"></path>
+              <path
+                d="M2.01 21 23 12 2.01 3 2 10l15 2-15 2z"
+                fill="white"
+              ></path>
             </svg>
           </button>
         </div>

@@ -30,9 +30,7 @@ const Layout = () => {
 
   return (
     <div
-      className={`flex flex-col w-full ${
-        isDashboard === 'home' ? 'h-screen' : ''
-      }`}
+      className={`flex w-full ${isDashboard === 'home' ? 'h-screen' : ''}`}
       style={{ fontFamily: 'Poppins, sans-serif' }}
     >
       <Header menu="flex" isSmall={headerAnimation} />
