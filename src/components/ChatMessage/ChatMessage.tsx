@@ -84,7 +84,7 @@ const ChatMessage = (props) => {
             </div>
             <div>
               <span
-                className={`py-4 rounded-lg inline-block rounded-bl-none text-white text-base bg-[#84909d] ${
+                className={`py-4 rounded-lg inline-block text-white text-base bg-[#84909d] ${
                   props.message === '...' ? '' : 'px-4'
                 }`}
               >
@@ -157,7 +157,7 @@ const ChatMessage = (props) => {
                 </button>
               ) : (
                 <div
-                  className={`rounded-lg inline-block rounded-br-none bg-[#1976d2] text-white text-base p-4`}
+                  className={`rounded-lg inline-block bg-[#1976d2] text-white text-base p-4`}
                 >
                   {props.message}
                 </div>
@@ -169,7 +169,7 @@ const ChatMessage = (props) => {
             <></>
           ) : (
             <>
-              <div className="relative top-[2px] right-[21px] order-1">
+              <div className="relative top-[-2px] right-[21px] order-1">
                 <svg
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
