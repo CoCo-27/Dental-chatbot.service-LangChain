@@ -14,7 +14,7 @@ const Chat = () => {
   }, []);
 
   return (
-    <div className="flex justify-stretch h-100% pt-[90px] w-full relative overflow-x-hidden">
+    <>
       <div className="w-full flex justify-center max-[1024px]:w-full">
         <div className="flex w-full laptop:w-8/12">
           <ChatMiddle />
@@ -27,7 +27,7 @@ const Chat = () => {
         </div>
         <script async src="//localhost:8081/widget.js"></script>
       </div>
-    </div>
+    </>
   );
 };
 

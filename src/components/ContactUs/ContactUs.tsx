@@ -37,7 +37,7 @@ const ContactUs = () => {
       });
   };
   return (
-    <div className="h-[calc(100vh-96px)] flex flex-col items-center justify-center bg-gray-100">
+    <div className="w-full h-full flex flex-col items-center justify-center bg-gray-100">
       <div
         className="
           flex flex-col

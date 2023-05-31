@@ -3,7 +3,7 @@ import imgUrl from 'src/assets/img/beams-basic.png';
 
 const Disclaimer = () => {
   return (
-    <div className="relative -mt-[5.75rem] overflow-hidden pt-[5.75rem]">
+    <div className="relative w-full -mt-[5.75rem] overflow-hidden pt-[5.75rem]">
       <img
         src={imgUrl}
         alt=""

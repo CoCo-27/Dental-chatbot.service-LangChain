@@ -20,6 +20,9 @@ const Layout = () => {
     case '/':
       isDashboard = 'home';
       break;
+    case '/contact':
+      isDashboard = 'contact';
+      break;
     case '/faq':
       isDashboard = 'faq';
       break;
@@ -30,11 +33,17 @@ const Layout = () => {
 
   return (
     <div
-      className={`flex w-full ${isDashboard === 'home' ? 'h-screen' : ''}`}
+      className={`flex w-full justify-center ${
+        isDashboard === 'home' || isDashboard === 'contact'
+          ? 'h-screen'
+          : 'h-full'
+      }`}
       style={{ fontFamily: 'Poppins, sans-serif' }}
     >
       <Header menu="flex" isSmall={headerAnimation} />
-      <Outlet />
+      <div className="flex justify-stretch h-100% pt-[90px] w-full relative overflow-x-hidden">
+        <Outlet />
+      </div>
     </div>
   );
 };
