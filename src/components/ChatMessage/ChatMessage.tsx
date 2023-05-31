@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IconDental } from '@tabler/icons-react';
 import historyServices from '../../services/historyServices';
-import url from '../../assets/img/human.svg';
 import './Message.css';
 
 const ChatMessage = (props) => {
