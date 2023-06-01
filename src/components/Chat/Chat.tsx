@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { notification } from 'antd';
+import LanguageDetect from 'languagedetect';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import uploadServices from 'src/services/uploadServices';
 import { isEmpty } from 'src/utils/isEmpty';
@@ -8,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const Chat = () => {
   const inputRef = useRef();
   const navigate = useNavigate();
+  const langDetect = new LanguageDetect();
   const [formValue, setFormValue] = useState('');
   const [array, setArray] = useState(
     JSON.parse(localStorage.getItem('open_chat_history'))
@@ -18,6 +20,7 @@ const Chat = () => {
               'Welcome to Dental Counselors for Immediate Implants! With this treatment method, you can have stable and new third teeth in just one day. Our practice in Berlin offers this service, and we are excited to share with you the requirements, course of treatment, and costs.',
             flag: true,
             isButton: false,
+            language: 'english',
           },
         ]
   );
@@ -31,7 +34,6 @@ const Chat = () => {
     type: false,
   });
   const [isFree, setIsFree] = useState(1);
-
   const req_qa_box = useRef(null);
 
   useEffect(() => {
@@ -39,8 +41,18 @@ const Chat = () => {
     if (!isEmpty(text.data)) {
       const save = array.slice();
       if (text.type === false) {
-        save.push({ message: text.data, flag: false, isButton: false });
-        save.push({ message: '...', flag: true, isButton: false });
+        save.push({
+          message: text.data,
+          flag: false,
+          isButton: false,
+          language: 'english',
+        });
+        save.push({
+          message: '...',
+          flag: true,
+          isButton: false,
+          language: 'english',
+        });
       } else {
         save[save.length - 1].message = text.data;
         save[save.length - 1].flag = true;
@@ -58,7 +70,14 @@ const Chat = () => {
   };
 
   const handleMessage = async (isClicked) => {
-    req_qa_box.current.scrollTop = req_qa_box.current.scrollHeight;
+    const lang_type = langDetect.detect(
+      isClicked === '' ? formValue : isClicked
+    );
+    const result = lang_type
+      .filter((item, index) => item[0] === 'english' || item[0] === 'german')
+      .sort((a, b) => b[1] - a[1]);
+    console.log('werwer = ', result[0][0]);
+
     if (!localStorage.getItem('email') && isFree !== 1) {
       notification.warning({
         message: '',
@@ -105,20 +124,24 @@ const Chat = () => {
             update[update.length - 1].message = answer;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
+            update[update.length - 1].language = result[0][0];
             questions.map((item, index) => {
               if (index > 1) {
                 update.push({
                   message: item.replace(/[0-9]/g, '').replace('.', ''),
                   flag: false,
                   isButton: true,
+                  language: result[0][0],
                 });
               }
+              return update;
             });
           } else {
             // save_history[save_history.length - 1][1] = res.data.data.text;
             update[update.length - 1].message = res.data.data.text;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
+            update[update.length - 1].language = result[0][0];
           }
           // const limitHistory =
           //   save_history.length > 6
@@ -164,6 +187,7 @@ const Chat = () => {
                       message={item.message}
                       status={item.flag}
                       isButton={item.isButton}
+                      language={item.language}
                       onClick={handleMessage}
                     />
                   </div>
