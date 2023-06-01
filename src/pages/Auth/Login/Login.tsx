@@ -27,27 +27,45 @@ const Login = () => {
       prompt: 'select_account',
     });
 
-    const loginResult = await signInWithPopup(auth, provider);
-
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(loginResult);
-    if (!credential) throw new Error('Missing credentials!');
-
-    //////////////////
-    const result = await authServices.handleGoogleAuther(
-      loginResult.user.email
-    );
-    ///////////////////
-    console.log(result);
-    notification.success({
-      description: 'Login Success',
-      message: '',
-    });
-    // localStorage.setItem('token', loginResult.user.getIdToken);
-    localStorage.setItem('email', loginResult.user.email);
-    setTimeout(() => {
-      navigate('/');
-    }, 500);
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        if (!credential) throw new Error('Missing credentials!');
+        const token = credential.accessToken;
+        const save_user = await authServices.handleGoogleAuther(
+          result.user.email
+        );
+        console.log(save_user);
+        notification.success({
+          description: 'Login Success',
+          message: '',
+        });
+        localStorage.setItem('email', result.user.email);
+        localStorage.setItem('token', token);
+        setTimeout(() => {
+          navigate('/');
+        }, 500);
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        if (
+          errorCode === 'auth/cancelled-popup-request' ||
+          errorCode === 'auth/popup-closed-by-user'
+        ) {
+          notification.info({
+            description:
+              'The current doamin is not active. Set up a live domain.',
+            message: '',
+          });
+        } else {
+          notification.error({
+            description: 'Firebase error',
+            message: '',
+          });
+        }
+      });
   };
 
   const handleAuth = async (e) => {
