@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { message } from 'antd';
+import LanguageDetect from 'languagedetect';
 import uploadServices from 'src/services/uploadServices';
 import FAQChatMessage from 'src/components/ChatMessage/FAQChatMessage';
 import { isEmpty } from 'src/utils/isEmpty';
 
 const FAQChatbot = () => {
   const inputRef = useRef();
+  const langDetect = new LanguageDetect();
   const req_qa_box = useRef(null);
   const [formValue, setFormValue] = useState('');
   const [text, setText] = useState({
@@ -21,6 +23,7 @@ const FAQChatbot = () => {
               'Welcome to Dental Counselors for Immediate Implants! With this treatment method, you can have stable and new third teeth in just one day. Our practice in Berlin offers this service, and we are excited to share with you the requirements, course of treatment, and costs.',
             flag: true,
             isButton: false,
+            language: 'english',
           },
         ]
   );
@@ -30,14 +33,26 @@ const FAQChatbot = () => {
     if (!isEmpty(text.data)) {
       const save = array.slice();
       if (text.type === false) {
-        save.push({ message: text.data, flag: false, isButton: false });
-        save.push({ message: '...', flag: true, isButton: false });
+        save.push({
+          message: text.data,
+          flag: false,
+          isButton: false,
+          language: 'english',
+        });
+        save.push({
+          message: '...',
+          flag: true,
+          isButton: false,
+          language: 'english',
+        });
       } else {
         save[save.length - 1].message = text.data;
         save[save.length - 1].flag = true;
       }
       setArray(save);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [text]);
 
   const handlePressEnter = (e) => {
@@ -48,6 +63,14 @@ const FAQChatbot = () => {
 
   const handleMessage = async (isClicked) => {
     req_qa_box.current.scrollTop = req_qa_box.current.scrollHeight;
+
+    const lang_type = langDetect.detect(
+      isClicked === '' ? formValue : isClicked
+    );
+    const result = lang_type
+      .filter((item, index) => item[0] === 'english' || item[0] === 'german')
+      .sort((a, b) => b[1] - a[1]);
+
     // After press enter, the input value is initialized
     setFormValue('');
     const save = array.slice();
@@ -77,19 +100,23 @@ const FAQChatbot = () => {
           update[update.length - 1].message = answer;
           update[update.length - 1].flag = true;
           update[update.length - 1].isButton = false;
+          update[update.length - 1].language = result[0][0];
           questions.map((item, index) => {
             if (index > 1) {
               update.push({
                 message: item.replace(/[0-9]/g, '').replace('.', ''),
                 flag: false,
                 isButton: true,
+                language: result[0][0],
               });
             }
+            return update;
           });
         } else {
           update[update.length - 1].message = res.data.data.text;
           update[update.length - 1].flag = true;
           update[update.length - 1].isButton = false;
+          update[update.length - 1].language = result[0][0];
         }
         setArray(update);
         localStorage.setItem('faq_chat_history', JSON.stringify(update));
@@ -123,6 +150,7 @@ const FAQChatbot = () => {
                 message={item.message}
                 status={item.flag}
                 isButton={item.isButton}
+                language={item.language}
                 onClick={handleMessage}
               />
             );
