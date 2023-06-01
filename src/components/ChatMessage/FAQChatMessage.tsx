@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import translate from 'translate';
 import './Message.css';
 
 const FAQChatMessage = (props) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [text, setText] = useState('');
+
+  const fetchData = async (string, lang) => {
+    const value = await translate(string, {
+      engine: 'deepl',
+      key: '3d0aa190-bffa-1a00-d4b7-57bac54cab9d:fx',
+      to: lang === 'english' ? 'en' : 'de',
+    });
+    setText(value);
+  };
 
   useEffect(() => {
     props.box_ref.current.scrollTop = props.box_ref.current.scrollHeight;
+    fetchData(props.message, props.language);
   }, [props.message]);
 
   useEffect(() => {
@@ -76,7 +88,7 @@ const FAQChatMessage = (props) => {
                     )}
                   </div>
                 ) : (
-                  props.message
+                  text
                 )}
               </span>
             </div>
@@ -89,15 +101,15 @@ const FAQChatMessage = (props) => {
               {props.isButton === true ? (
                 <button
                   className="bg-transparent text-[#1976d2] font-semibold rounded py-1 px-2 text-sm border border-[#1976d280] border-solid hover:border-[#1976d2] hover:bg-[#1976d20a]"
-                  onClick={() => props.onClick(props.message)}
+                  onClick={() => props.onClick(text)}
                 >
-                  {props.message}
+                  {text}
                 </button>
               ) : (
                 <div
                   className={`rounded-lg inline-block bg-[#1976d2] text-white text-base p-2`}
                 >
-                  {props.message}
+                  {text}
                 </div>
               )}
             </div>
