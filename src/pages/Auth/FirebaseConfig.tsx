@@ -1,17 +1,17 @@
 import * as firebase from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
-const FirebaseConfig = {
-  apiKey: 'AIzaSyArJ210faojxFTHk8S77HkZIkhKosISWGM',
-  authDomain: 'chatgpt4-eb63e.firebaseapp.com',
-  projectId: 'chatgpt4-eb63e',
-  storageBucket: 'chatgpt4-eb63e.appspot.com',
-  messagingSenderId: '728830295981',
-  appId: '1:728830295981:web:ef01bb06b79e4e5c766b24',
-  measurementId: 'G-9EXP4HXD01',
+const firebaseConfig = {
+  apiKey: "AIzaSyCtWYhKfmeF5OTeJVeKmE3z4ZhKTOKiobg",
+  authDomain: "dental-assistant-2a850.firebaseapp.com",
+  projectId: "dental-assistant-2a850",
+  storageBucket: "dental-assistant-2a850.appspot.com",
+  messagingSenderId: "535812746608",
+  appId: "1:535812746608:web:27a777f1e99a830f98b3b5",
+  measurementId: "G-44JN96LKQY"
 };
 
-firebase.initializeApp(FirebaseConfig);
+firebase.initializeApp(firebaseConfig);
 const auth = getAuth();
 
 export default auth;

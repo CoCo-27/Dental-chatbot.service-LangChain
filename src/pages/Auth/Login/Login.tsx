@@ -39,8 +39,6 @@ const Login = () => {
     );
     ///////////////////
 
-    console.log(result);
-
     notification.success({
       description: 'Login Success',
       message: '',
@@ -187,11 +185,9 @@ const Login = () => {
                   src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIiBjbGFzcz0iIj48Zz48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNS45OTcgMy45ODVoMi4xOTF2LTMuODE2Yy0uMzc4LS4wNTItMS42NzgtLjE2OS0zLjE5Mi0uMTY5LTMuMTU5IDAtNS4zMjMgMS45ODctNS4zMjMgNS42Mzl2My4zNjFoLTMuNDg2djQuMjY2aDMuNDg2djEwLjczNGg0LjI3NHYtMTAuNzMzaDMuMzQ1bC41MzEtNC4yNjZoLTMuODc3di0yLjkzOWMuMDAxLTEuMjMzLjMzMy0yLjA3NyAyLjA1MS0yLjA3N3oiIGZpbGw9IiNmZmZmZmYiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48L2c+PC9zdmc+"
                 />
               </a>
-              <a
-                href="https://twitter.com/ajeemon?lang=en"
-                target="_blank"
+              <button
                 className="w-11 h-11 items-center justify-center inline-flex rounded-2xl font-bold text-lg  text-white bg-blue-400 hover:shadow-lg cursor-pointer transition ease-in duration-300"
-                rel="noreferrer"
+                onClick={()=>handleGoogleLogin()}
               >
                 <svg className="w-4" viewBox="0 0 533.5 544.3">
                   <path
@@ -211,7 +207,7 @@ const Login = () => {
                     fill="white"
                   ></path>
                 </svg>
-              </a>
+              </button>
               <a
                 href="https://in.linkedin.com/in/ajeeshmon"
                 target="_blank"
@@ -225,12 +221,12 @@ const Login = () => {
                 />
               </a>
             </div>
-            <div className="flex items-center justify-center space-x-2">
-              <span className="h-px w-16 bg-gray-200"></span>
+            <div className="flex items-center gap-1 justify-center">
+              <span className="h-px w-32 bg-gray-200"></span>
               <span className="text-gray-300 font-normal">
                 or continue with
               </span>
-              <span className="h-px w-16 bg-gray-200"></span>
+              <span className="h-px w-32 bg-gray-200"></span>
             </div>
             <form className="mt-8 space-y-6" onSubmit={handleAuth}>
               <input type="hidden" name="remember" value="true" />
