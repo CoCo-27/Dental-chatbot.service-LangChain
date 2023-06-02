@@ -206,7 +206,7 @@ const Chat = () => {
             className="m-0 w-10/12 rounded resize-none border border-black/20 overflow-hidden bg-transparent text-black hover:border-[#1976d2] dark:bg-transparent dark:text-white py-2 pl-4"
             value={formValue}
             required
-            placeholder="Type a message ..."
+            placeholder="Eine Nachricht schreiben ..."
             onChange={(e) => setFormValue(e.target.value)}
             style={{
               maxHeight: '400px',

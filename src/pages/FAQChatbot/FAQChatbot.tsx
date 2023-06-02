@@ -135,7 +135,7 @@ const FAQChatbot = () => {
     <div className="flex-1 p:2 flex flex-col h-screen justify-between">
       <div className="bg-[#0071b2] flex sm:items-center justify-center p-6 border-b-2 border-gray-200">
         <span className="text-lg font-bold text-white">
-          Question? Chat with us!
+        Frage? Chatten Sie mit uns!
         </span>
       </div>
       <div
@@ -165,7 +165,7 @@ const FAQChatbot = () => {
             required
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
-            placeholder="Write your message..."
+            placeholder="Schreiben Sie Ihre Nachricht ..."
             className="w-full focus:outline-none focus:placeholder-gray-400 text-black/20 rounded-md py-3 pl-4 pr-14 bg-gray-200"
             onKeyDown={(e) => handlePressEnter(e)}
           />
