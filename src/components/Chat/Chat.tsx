@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import LanguageDetect from 'languagedetect';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import uploadServices from 'src/services/uploadServices';
+import greeting from '../../config/greeting';
 import { isEmpty } from 'src/utils/isEmpty';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +18,7 @@ const Chat = () => {
       : [
           {
             message:
-              'Willkommen bei den Zahnberatern für Sofortimplantate! Mit dieser Behandlungsmethode können Sie in nur einem Tag stabile und neue dritte Zähne haben. Unsere Praxis in Berlin bietet diesen Service an und wir informieren Sie gerne über die Voraussetzungen, den Behandlungsablauf und die Kosten.',
+            greeting,
             flag: true,
             isButton: false,
             language: 'english',

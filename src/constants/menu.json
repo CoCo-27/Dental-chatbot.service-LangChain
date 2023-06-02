@@ -1,6 +1,6 @@
 [
-  { "id": "home", "name": "Home" },
-  { "id": "terms", "name": "Terms of service" },
-  { "id": "policy", "name": "Privacy Policy" },
-  { "id": "contact", "name": "Contact us" }
+  { "id": "home", "name": "Startseite" },
+  { "id": "terms", "name": "Nutzungsbedingungen" },
+  { "id": "policy", "name": "Datenschutzerklärung" },
+  { "id": "contact", "name": "Kontaktseite" }
 ]
