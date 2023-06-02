@@ -117,7 +117,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
                       <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                       <circle cx="8.5" cy="7" r="4" />
                     </svg>
-                    <span className="ml-4">LOG OUT</span>
+                    <span className="ml-4">ausloggen</span>
                   </button>
                 ) : (
                   <button
@@ -135,7 +135,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
                       <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                       <circle cx="8.5" cy="7" r="4" />
                     </svg>
-                    <span className="ml-4">LOGIN</span>
+                    <span className="ml-4">einloggen</span>
                   </button>
                 )}
               </div>
