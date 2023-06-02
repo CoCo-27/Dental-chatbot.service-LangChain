@@ -1,0 +1,2 @@
+const string = 'Willkommen bei den Zahnberatern für Sofortimplantate! Mit dieser Behandlungsmethode können Sie in nur einem Tag stabile und neue dritte Zähne haben. Unsere Praxis in Berlin bietet diesen Service an und wir informieren Sie gerne über die Voraussetzungen, den Behandlungsablauf und die Kosten.';
+export default string

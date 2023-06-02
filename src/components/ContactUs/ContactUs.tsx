@@ -55,7 +55,7 @@ const ContactUs = () => {
         "
       >
         <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
-          Contact us Now
+        Kontaktiere uns jetzt
         </div>
         <div className="mt-10">
           <form ref={form} onSubmit={handleSubmit}>
@@ -64,7 +64,7 @@ const ContactUs = () => {
                 htmlFor="name"
                 className="mb-1 text-xs tracking-wide text-gray-600"
               >
-                Name:
+                Gib deinen Namen ein
               </label>
               <div className="relative">
                 <div
@@ -107,7 +107,7 @@ const ContactUs = () => {
                 htmlFor="to_name"
                 className="mb-1 text-xs tracking-wide text-gray-600"
               >
-                Name:
+                Gib deinen Namen ein
               </label>
               <div className="relative">
                 <div
@@ -151,7 +151,7 @@ const ContactUs = () => {
                 htmlFor="email"
                 className="mb-1 text-xs tracking-wide text-gray-600"
               >
-                E-Mail Address:
+                Gib deine E-Mail-Adresse ein
               </label>
               <div className="relative">
                 <div
@@ -194,7 +194,7 @@ const ContactUs = () => {
                 htmlFor="message"
                 className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
               >
-                Message:
+                Teile uns mit, worüber du nachdenkst...
               </label>
               <div className="relative">
                 <div
@@ -257,7 +257,7 @@ const ContactUs = () => {
               >
                 {!loading ? (
                   <>
-                    <span className="mr-2 uppercase">Contact Us</span>
+                    <span className="mr-2 uppercase">KONTAKTIERE UNS</span>
                     <span>
                       <svg
                         className="h-6 w-6"
