@@ -98,7 +98,7 @@ const ContactUs = () => {
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-                  placeholder="Enter your name"
+                  placeholder="Geben Sie Ihren Namen ein"
                 />
               </div>
             </div>
@@ -142,7 +142,7 @@ const ContactUs = () => {
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-                  placeholder="Enter your name"
+                  placeholder="Geben Sie Ihren Namen ein"
                 />
               </div>
             </div>
@@ -185,7 +185,7 @@ const ContactUs = () => {
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-                  placeholder="Enter your email"
+                  placeholder="Geben Sie Ihre E-Mail-Adresse ein"
                 />
               </div>
             </div>
@@ -229,7 +229,7 @@ const ContactUs = () => {
                     py-2
                     focus:outline-none focus:border-blue-400
                   "
-                  placeholder="Tell us what you're thinking about..."
+                  placeholder="Teilen Sie uns mit, worüber Sie nachdenken…"
                 />
               </div>
             </div>
