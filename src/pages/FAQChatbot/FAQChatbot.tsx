@@ -20,7 +20,7 @@ const FAQChatbot = () => {
       : [
           {
             message:
-              'Welcome to Dental Counselors for Immediate Implants! With this treatment method, you can have stable and new third teeth in just one day. Our practice in Berlin offers this service, and we are excited to share with you the requirements, course of treatment, and costs.',
+              'Willkommen bei den Zahnberatern für Sofortimplantate! Mit dieser Behandlungsmethode können Sie in nur einem Tag stabile und neue dritte Zähne haben. Unsere Praxis in Berlin bietet diesen Service an und wir informieren Sie gerne über die Voraussetzungen, den Behandlungsablauf und die Kosten.',
             flag: true,
             isButton: false,
             language: 'english',
