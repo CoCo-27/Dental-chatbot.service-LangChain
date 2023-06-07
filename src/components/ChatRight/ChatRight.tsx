@@ -282,21 +282,23 @@ const Rightbar = () => {
         </div>
       </div>
 
-      <div
-        className="w-full flex flex-col overflow-y-auto"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? (
-          <CaretUpOutlined
-            style={{
-              height: '20px',
-              marginBottom: '12px',
-              cursor: 'pointer',
-            }}
-          />
-        ) : (
-          <CaretDownOutlined style={{ height: '20px', cursor: 'pointer' }} />
-        )}
+      <div className="w-full flex flex-col overflow-y-auto">
+        <div
+          className="w-full flex justify-center items-center"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? (
+            <CaretUpOutlined
+              style={{
+                height: '20px',
+                marginBottom: '12px',
+                cursor: 'pointer',
+              }}
+            />
+          ) : (
+            <CaretDownOutlined style={{ height: '20px', cursor: 'pointer' }} />
+          )}
+        </div>
         <div className="flex-grow w-full overflow-y-auto">
           <div
             className={`transition-all duration-500 ease-in-out overflow-y-auto ${
