@@ -3,10 +3,15 @@ import { Select, Radio, Input, InputNumber } from 'antd';
 
 const Rightbar = () => {
   const { Option } = Select;
+  const [treat_type, setTreat_Type] = useState(0);
   const [treat_1, setTreat_1] = useState(0);
   const [treat_2, setTreat_2] = useState(0);
   const [treat_3, setTreat_3] = useState(0);
   const [treat_5, setTreat_5] = useState(0);
+
+  const handleTreat_Type = (value) => {
+    setTreat_Type(value);
+  };
 
   const handleTreat_1 = (value) => {
     setTreat_1(value);
@@ -522,195 +527,206 @@ const Rightbar = () => {
           <h5 className="text-black font-bold text-2xl">Treatment</h5>
         </div>
         <div className="p-4 flex flex-col">
-          {/* ---------- General Dentistry --------------*/}
           <div className="p-2 flex items-center gap-2">
             <label
-              htmlFor="treat_1"
+              htmlFor="treat_type"
               className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
             >
-              General Dentistry:
+              Treat Type:
             </label>
-            <div className="w-2/3 gap-1 flex">
-              <Select
-                defaultValue={0}
-                style={{ width: '50%' }}
-                onChange={handleTreat_1}
-              >
-                <Option value={0}>Fillings</Option>
-                <Option value={1}>Root canal treatment</Option>
-                <Option value={2}>Dental cleaning and polishing</Option>
-                <Option value={3}>Fluoride treatment</Option>
-                <Option value={4}>Periodontal treatment</Option>
-                <Option value={5}>sporadic</Option>
-              </Select>
-              {treat_1 === 0 || treat_1 === 4 ? (
-                <Select defaultValue={0} style={{ width: '50%' }}>
-                  <Option value={0}>
-                    {treat_1 === 0 ? 'amalgam' : 'scaling'}
-                  </Option>
-                  <Option value={1}>
-                    {treat_1 === 0 ? 'composite' : 'root planing'}
-                  </Option>
-                </Select>
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-
-          {/* ---------- Oral Surgery --------------*/}
-          <div className="p-2 flex items-center gap-2">
-            <label
-              htmlFor="treat_2"
-              className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-            >
-              Oral Surgery:
-            </label>
-            <div className="w-2/3 gap-1 flex">
-              <Select
-                defaultValue={0}
-                style={{ width: '50%' }}
-                onChange={handleTreat_2}
-              >
-                <Option value={0}>Extraction</Option>
-                <Option value={1}>Wisdom tooth removal</Option>
-                <Option value={2}>Apicoectomy</Option>
-                <Option value={3}>Bone grafting</Option>
-              </Select>
-              {treat_2 === 0 || treat_2 === 2 || treat_2 === 3 ? (
-                <Select defaultValue={0} style={{ width: '50%' }}>
-                  <Option value={0}>
-                    {treat_2 === 0
-                      ? 'simple'
-                      : treat_2 === 2
-                      ? 'root end'
-                      : 'sinus lift'}
-                  </Option>
-                  <Option value={1}>
-                    {treat_2 === 0
-                      ? 'surgical'
-                      : treat_2 === 2
-                      ? 'surgery'
-                      : 'bone block'}
-                  </Option>
-                </Select>
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-
-          {/* ---------- Prosthodontics --------------*/}
-          <div className="p-2 flex items-center gap-2">
-            <label
-              htmlFor="treat_3"
-              className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-            >
-              Prosthodontics:
-            </label>
-            <div className="w-2/3 gap-1 flex">
-              <Select
-                defaultValue={0}
-                style={{ width: '50%' }}
-                onChange={handleTreat_3}
-              >
-                <Option value={0}>Crowns</Option>
-                <Option value={1}>Fixed bridges</Option>
-                <Option value={2}>Removable dentures</Option>
-                <Option value={3}>Implant-supported prostheses</Option>
-              </Select>
-              {treat_3 === 0 || treat_3 === 2 ? (
-                <Select defaultValue={0} style={{ width: '50%' }}>
-                  <Option value={0}>
-                    {treat_3 === 0 ? 'all-ceramic' : 'partial'}
-                  </Option>
-                  <Option value={1}>
-                    {treat_3 === 0 ? 'porcelain-fused-to-metal' : 'complete'}
-                  </Option>
-
-                  {treat_3 === 0 ? <Option value={2}>gold</Option> : <></>}
-                </Select>
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-
-          {/* ---------- Implantology --------------*/}
-          <div className="p-2 flex items-center gap-2">
-            <label
-              htmlFor="treat_4"
-              className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-            >
-              Implantology:
-            </label>
-            <div className="w-2/3 gap-1 flex">
+            <div className="w-2/3">
               <Select
                 defaultValue={0}
                 style={{ width: '100%' }}
-                onChange={handleTreat_4}
+                onChange={handleTreat_Type}
               >
-                <Option value={0}>Dental implant placement</Option>
-                <Option value={1}>Implant-supported crown/bridge</Option>
-                <Option value={2}>Bone grafting for implants</Option>
+                <Option value={0}>Choose</Option>
+                <Option value={1}>General Dentistry</Option>
+                <Option value={2}>Oral Surgery</Option>
+                <Option value={3}>Prosthodontics</Option>
+                <Option value={4}>Implantology</Option>
+                <Option value={5}>Orthodontics</Option>
+                <Option value={6}>Pediatric Dentistry</Option>
               </Select>
             </div>
           </div>
-
-          {/* ---------- Orthodontics --------------*/}
-          <div className="p-2 flex items-center gap-2">
-            <label
-              htmlFor="treat_5"
-              className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-            >
-              Orthodontics:
-            </label>
-            <div className="w-2/3 gap-1 flex">
-              <Select
-                defaultValue={0}
-                style={{ width: '50%' }}
-                onChange={handleTreat_5}
-              >
-                <Option value={0}>Fixed braces</Option>
-                <Option value={1}>Removable braces</Option>
-                <Option value={2}>Invisalign</Option>
-                <Option value={3}>Retainers</Option>
-              </Select>
-              {treat_5 === 0 || treat_5 === 3 ? (
-                <Select defaultValue={0} style={{ width: '50%' }}>
-                  <Option value={0}>{treat_5 === 0 ? 'metal' : 'fixed'}</Option>
-                  <Option value={1}>
-                    {treat_5 === 0 ? 'ceramic' : 'removable'}
-                  </Option>
+          {treat_type === 1 ? (
+            <div className="p-2 flex items-center gap-2">
+              <label
+                htmlFor="treat_1"
+                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+              ></label>
+              <div className="w-2/3 gap-1 flex">
+                <Select
+                  defaultValue={0}
+                  style={{ width: '50%' }}
+                  onChange={handleTreat_1}
+                >
+                  <Option value={0}>Fillings</Option>
+                  <Option value={1}>Root canal treatment</Option>
+                  <Option value={2}>Dental cleaning and polishing</Option>
+                  <Option value={3}>Fluoride treatment</Option>
+                  <Option value={4}>Periodontal treatment</Option>
+                  <Option value={5}>sporadic</Option>
                 </Select>
-              ) : (
-                <></>
-              )}
+                {treat_1 === 0 || treat_1 === 4 ? (
+                  <Select defaultValue={0} style={{ width: '50%' }}>
+                    <Option value={0}>
+                      {treat_1 === 0 ? 'amalgam' : 'scaling'}
+                    </Option>
+                    <Option value={1}>
+                      {treat_1 === 0 ? 'composite' : 'root planing'}
+                    </Option>
+                  </Select>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-          </div>
+          ) : treat_type === 2 ? (
+            <div className="p-2 flex items-center gap-2">
+              <label
+                htmlFor="treat_2"
+                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+              ></label>
+              <div className="w-2/3 gap-1 flex">
+                <Select
+                  defaultValue={0}
+                  style={{ width: '50%' }}
+                  onChange={handleTreat_2}
+                >
+                  <Option value={0}>Extraction</Option>
+                  <Option value={1}>Wisdom tooth removal</Option>
+                  <Option value={2}>Apicoectomy</Option>
+                  <Option value={3}>Bone grafting</Option>
+                </Select>
+                {treat_2 === 0 || treat_2 === 2 || treat_2 === 3 ? (
+                  <Select defaultValue={0} style={{ width: '50%' }}>
+                    <Option value={0}>
+                      {treat_2 === 0
+                        ? 'simple'
+                        : treat_2 === 2
+                        ? 'root end'
+                        : 'sinus lift'}
+                    </Option>
+                    <Option value={1}>
+                      {treat_2 === 0
+                        ? 'surgical'
+                        : treat_2 === 2
+                        ? 'surgery'
+                        : 'bone block'}
+                    </Option>
+                  </Select>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          ) : treat_type === 3 ? (
+            <div className="p-2 flex items-center gap-2">
+              <label
+                htmlFor="treat_3"
+                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+              ></label>
+              <div className="w-2/3 gap-1 flex">
+                <Select
+                  defaultValue={0}
+                  style={{ width: '50%' }}
+                  onChange={handleTreat_3}
+                >
+                  <Option value={0}>Crowns</Option>
+                  <Option value={1}>Fixed bridges</Option>
+                  <Option value={2}>Removable dentures</Option>
+                  <Option value={3}>Implant-supported prostheses</Option>
+                </Select>
+                {treat_3 === 0 || treat_3 === 2 ? (
+                  <Select defaultValue={0} style={{ width: '50%' }}>
+                    <Option value={0}>
+                      {treat_3 === 0 ? 'all-ceramic' : 'partial'}
+                    </Option>
+                    <Option value={1}>
+                      {treat_3 === 0 ? 'porcelain-fused-to-metal' : 'complete'}
+                    </Option>
 
-          {/* ---------- Pediatric Dentistry --------------*/}
-          <div className="p-2 flex items-center gap-2">
-            <label
-              htmlFor="treat_6"
-              className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-            >
-              Pediatric Dentistry:
-            </label>
-            <div className="w-2/3 gap-1 flex">
-              <Select
-                defaultValue={0}
-                style={{ width: '100%' }}
-                onChange={handleTreat_6}
-              >
-                <Option value={0}>Baby tooth fillings</Option>
-                <Option value={1}>Baby tooth extraction</Option>
-                <Option value={2}>Fluoridation</Option>
-                <Option value={3}>Sealants</Option>
-                <Option value={4}>Early childhood orthodontics</Option>
-              </Select>
+                    {treat_3 === 0 ? <Option value={2}>gold</Option> : <></>}
+                  </Select>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-          </div>
+          ) : treat_type === 4 ? (
+            <div className="p-2 flex items-center gap-2">
+              <label
+                htmlFor="treat_4"
+                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+              ></label>
+              <div className="w-2/3 gap-1 flex">
+                <Select
+                  defaultValue={0}
+                  style={{ width: '100%' }}
+                  onChange={handleTreat_4}
+                >
+                  <Option value={0}>Dental implant placement</Option>
+                  <Option value={1}>Implant-supported crown/bridge</Option>
+                  <Option value={2}>Bone grafting for implants</Option>
+                </Select>
+              </div>
+            </div>
+          ) : treat_type === 5 ? (
+            <div className="p-2 flex items-center gap-2">
+              <label
+                htmlFor="treat_5"
+                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+              ></label>
+              <div className="w-2/3 gap-1 flex">
+                <Select
+                  defaultValue={0}
+                  style={{ width: '50%' }}
+                  onChange={handleTreat_5}
+                >
+                  <Option value={0}>Fixed braces</Option>
+                  <Option value={1}>Removable braces</Option>
+                  <Option value={2}>Invisalign</Option>
+                  <Option value={3}>Retainers</Option>
+                </Select>
+                {treat_5 === 0 || treat_5 === 3 ? (
+                  <Select defaultValue={0} style={{ width: '50%' }}>
+                    <Option value={0}>
+                      {treat_5 === 0 ? 'metal' : 'fixed'}
+                    </Option>
+                    <Option value={1}>
+                      {treat_5 === 0 ? 'ceramic' : 'removable'}
+                    </Option>
+                  </Select>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+          ) : treat_type === 6 ? (
+            <div className="p-2 flex items-center gap-2">
+              <label
+                htmlFor="treat_6"
+                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+              ></label>
+              <div className="w-2/3 gap-1 flex">
+                <Select
+                  defaultValue={0}
+                  style={{ width: '100%' }}
+                  onChange={handleTreat_6}
+                >
+                  <Option value={0}>Baby tooth fillings</Option>
+                  <Option value={1}>Baby tooth extraction</Option>
+                  <Option value={2}>Fluoridation</Option>
+                  <Option value={3}>Sealants</Option>
+                  <Option value={4}>Early childhood orthodontics</Option>
+                </Select>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
 
