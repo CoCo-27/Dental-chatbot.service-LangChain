@@ -1,18 +1,46 @@
-import React, { useState } from 'react';
-import { Select, Radio, Input, InputNumber, Button } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Select, Radio, Input, InputNumber } from 'antd';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
+import treatmentServices from 'src/services/treatmentServices';
+import itemServices from 'src/services/itemServices';
+import { isEmpty } from 'src/utils/isEmpty';
 
 const Rightbar = () => {
   const { Option } = Select;
   const [isOpen, setIsOpen] = useState(false);
+  const [treatmentArray, setTreatmentArray] = useState([]);
+  const [itemArray, setItemArray] = useState([]);
   const [treat_type, setTreat_Type] = useState(0);
+  const [subNameList, setSubNameList] = useState(0);
   const [treat_1, setTreat_1] = useState(0);
   const [treat_2, setTreat_2] = useState(0);
   const [treat_3, setTreat_3] = useState(0);
   const [treat_5, setTreat_5] = useState(0);
 
+  useEffect(() => {
+    treatmentServices
+      .getItems()
+      .then((res) => {
+        console.log(res);
+        setTreatmentArray(res.data.data[0].value);
+      })
+      .catch((error) => console.log(error));
+
+    itemServices
+      .getItems()
+      .then((res) => {
+        console.log(res);
+        setItemArray(res.data.data[0].value);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   const handleTreat_Type = (value) => {
     setTreat_Type(value);
+  };
+  const handleSubName = (value) => {
+    console.log(value);
+    setSubNameList(value);
   };
 
   const handleTreat_1 = (value) => {
@@ -59,205 +87,56 @@ const Rightbar = () => {
         </div>
         <div className="flex flex-col">
           <div className="p-2 flex items-center gap-2">
-            <label
-              htmlFor="treat_type"
-              className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-            >
-              Treat Type:
-            </label>
-            <div className="w-2/3">
-              <Select
-                defaultValue={0}
-                style={{ width: '100%' }}
-                onChange={handleTreat_Type}
-              >
-                <Option value={0}>Choose</Option>
-                <Option value={1}>General Dentistry</Option>
-                <Option value={2}>Oral Surgery</Option>
-                <Option value={3}>Prosthodontics</Option>
-                <Option value={4}>Implantology</Option>
-                <Option value={5}>Orthodontics</Option>
-                <Option value={6}>Pediatric Dentistry</Option>
-              </Select>
+            <div className="w-full flex flex-col gap-4">
+              {treatmentArray.length === 0 ? (
+                <></>
+              ) : (
+                <Select
+                  defaultValue={0}
+                  style={{ width: '100%' }}
+                  onChange={handleTreat_Type}
+                >
+                  {treatmentArray?.map((item, index) => (
+                    <Option key={index} value={index}>
+                      {item.name}
+                    </Option>
+                  ))}
+                </Select>
+              )}
+              <div className="flex items-center gap-4">
+                {!isEmpty(treatmentArray[treat_type]?.treatments) && (
+                  <Select
+                    defaultValue={0}
+                    style={{ width: '50%' }}
+                    onChange={handleSubName}
+                  >
+                    {treatmentArray[treat_type]?.treatments.map(
+                      (item, index) => (
+                        <Option key={index} value={index}>
+                          {item.subName}
+                        </Option>
+                      )
+                    )}
+                  </Select>
+                )}
+                {treatmentArray[treat_type]?.treatments &&
+                  !isEmpty(
+                    treatmentArray[treat_type]?.treatments[subNameList]
+                      ?.subtreatments
+                  ) && (
+                    <Select defaultValue={0} style={{ width: '50%' }}>
+                      {treatmentArray[treat_type]?.treatments[
+                        subNameList
+                      ]?.subtreatments?.map((item, index) => (
+                        <Option key={index} value={index}>
+                          {item.value}
+                        </Option>
+                      ))}
+                    </Select>
+                  )}
+              </div>
             </div>
           </div>
-          {treat_type === 1 ? (
-            <div className="p-2 flex items-center gap-2">
-              <label
-                htmlFor="treat_1"
-                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-              ></label>
-              <div className="w-2/3 gap-1 flex">
-                <Select
-                  defaultValue={0}
-                  style={{ width: '50%' }}
-                  onChange={handleTreat_1}
-                >
-                  <Option value={0}>Fillings</Option>
-                  <Option value={1}>Root canal treatment</Option>
-                  <Option value={2}>Dental cleaning and polishing</Option>
-                  <Option value={3}>Fluoride treatment</Option>
-                  <Option value={4}>Periodontal treatment</Option>
-                  <Option value={5}>sporadic</Option>
-                </Select>
-                {treat_1 === 0 || treat_1 === 4 ? (
-                  <Select defaultValue={0} style={{ width: '50%' }}>
-                    <Option value={0}>
-                      {treat_1 === 0 ? 'amalgam' : 'scaling'}
-                    </Option>
-                    <Option value={1}>
-                      {treat_1 === 0 ? 'composite' : 'root planing'}
-                    </Option>
-                  </Select>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
-          ) : treat_type === 2 ? (
-            <div className="p-2 flex items-center gap-2">
-              <label
-                htmlFor="treat_2"
-                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-              ></label>
-              <div className="w-2/3 gap-1 flex">
-                <Select
-                  defaultValue={0}
-                  style={{ width: '50%' }}
-                  onChange={handleTreat_2}
-                >
-                  <Option value={0}>Extraction</Option>
-                  <Option value={1}>Wisdom tooth removal</Option>
-                  <Option value={2}>Apicoectomy</Option>
-                  <Option value={3}>Bone grafting</Option>
-                </Select>
-                {treat_2 === 0 || treat_2 === 2 || treat_2 === 3 ? (
-                  <Select defaultValue={0} style={{ width: '50%' }}>
-                    <Option value={0}>
-                      {treat_2 === 0
-                        ? 'simple'
-                        : treat_2 === 2
-                        ? 'root end'
-                        : 'sinus lift'}
-                    </Option>
-                    <Option value={1}>
-                      {treat_2 === 0
-                        ? 'surgical'
-                        : treat_2 === 2
-                        ? 'surgery'
-                        : 'bone block'}
-                    </Option>
-                  </Select>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
-          ) : treat_type === 3 ? (
-            <div className="p-2 flex items-center gap-2">
-              <label
-                htmlFor="treat_3"
-                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-              ></label>
-              <div className="w-2/3 gap-1 flex">
-                <Select
-                  defaultValue={0}
-                  style={{ width: '50%' }}
-                  onChange={handleTreat_3}
-                >
-                  <Option value={0}>Crowns</Option>
-                  <Option value={1}>Fixed bridges</Option>
-                  <Option value={2}>Removable dentures</Option>
-                  <Option value={3}>Implant-supported prostheses</Option>
-                </Select>
-                {treat_3 === 0 || treat_3 === 2 ? (
-                  <Select defaultValue={0} style={{ width: '50%' }}>
-                    <Option value={0}>
-                      {treat_3 === 0 ? 'all-ceramic' : 'partial'}
-                    </Option>
-                    <Option value={1}>
-                      {treat_3 === 0 ? 'porcelain-fused-to-metal' : 'complete'}
-                    </Option>
-
-                    {treat_3 === 0 ? <Option value={2}>gold</Option> : <></>}
-                  </Select>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
-          ) : treat_type === 4 ? (
-            <div className="p-2 flex items-center gap-2">
-              <label
-                htmlFor="treat_4"
-                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-              ></label>
-              <div className="w-2/3 gap-1 flex">
-                <Select
-                  defaultValue={0}
-                  style={{ width: '100%' }}
-                  onChange={handleTreat_4}
-                >
-                  <Option value={0}>Dental implant placement</Option>
-                  <Option value={1}>Implant-supported crown/bridge</Option>
-                  <Option value={2}>Bone grafting for implants</Option>
-                </Select>
-              </div>
-            </div>
-          ) : treat_type === 5 ? (
-            <div className="p-2 flex items-center gap-2">
-              <label
-                htmlFor="treat_5"
-                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-              ></label>
-              <div className="w-2/3 gap-1 flex">
-                <Select
-                  defaultValue={0}
-                  style={{ width: '50%' }}
-                  onChange={handleTreat_5}
-                >
-                  <Option value={0}>Fixed braces</Option>
-                  <Option value={1}>Removable braces</Option>
-                  <Option value={2}>Invisalign</Option>
-                  <Option value={3}>Retainers</Option>
-                </Select>
-                {treat_5 === 0 || treat_5 === 3 ? (
-                  <Select defaultValue={0} style={{ width: '50%' }}>
-                    <Option value={0}>
-                      {treat_5 === 0 ? 'metal' : 'fixed'}
-                    </Option>
-                    <Option value={1}>
-                      {treat_5 === 0 ? 'ceramic' : 'removable'}
-                    </Option>
-                  </Select>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
-          ) : treat_type === 6 ? (
-            <div className="p-2 flex items-center gap-2">
-              <label
-                htmlFor="treat_6"
-                className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
-              ></label>
-              <div className="w-2/3 gap-1 flex">
-                <Select
-                  defaultValue={0}
-                  style={{ width: '100%' }}
-                  onChange={handleTreat_6}
-                >
-                  <Option value={0}>Baby tooth fillings</Option>
-                  <Option value={1}>Baby tooth extraction</Option>
-                  <Option value={2}>Fluoridation</Option>
-                  <Option value={3}>Sealants</Option>
-                  <Option value={4}>Early childhood orthodontics</Option>
-                </Select>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )}
         </div>
       </div>
 
@@ -284,29 +163,119 @@ const Rightbar = () => {
 
       <div className="w-full flex flex-col overflow-y-auto">
         <div
-          className="w-full flex justify-center items-center"
+          className="flex flex-row gap-4 items-center cursor-pointer select-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? (
-            <CaretUpOutlined
-              style={{
-                height: '20px',
-                marginBottom: '12px',
-                cursor: 'pointer',
-              }}
-            />
-          ) : (
-            <CaretDownOutlined style={{ height: '20px', cursor: 'pointer' }} />
-          )}
+          <svg
+            className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
+            focusable="false"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            data-testid="MedicalInformationIcon"
+            width={'2rem'}
+            height={'2rem'}
+            fill="#1976d2"
+          >
+            <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-3h2v5h-2V4zm0 12H9v2H7v-2H5v-2h2v-2h2v2h2v2zm2-1.5V13h6v1.5h-6zm0 3V16h4v1.5h-4z"></path>
+          </svg>
+          <h5 className="text-black font-bold text-2xl pt-2">
+            Description of symptom
+          </h5>
+          <div className="flex justify-center items-center pt-2">
+            {isOpen ? (
+              <CaretUpOutlined
+                style={{
+                  height: '20px',
+                  cursor: 'pointer',
+                }}
+                rev={undefined}
+              />
+            ) : (
+              <CaretDownOutlined
+                style={{ height: '20px', cursor: 'pointer' }}
+                rev={undefined}
+              />
+            )}
+          </div>
         </div>
+
         <div className="flex-grow w-full overflow-y-auto">
           <div
             className={`transition-all duration-500 ease-in-out overflow-y-auto ${
               isOpen ? 'h-full' : 'h-0'
             }`}
           >
+            {itemArray?.map((item, index) => (
+              <div className="px-4 pt-6 flex items-center gap-2">
+                {item.type === 0 ? (
+                  <>
+                    <label
+                      htmlFor="item_type"
+                      className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                    >
+                      {item.name}:
+                    </label>
+                    <div className="w-2/3">
+                      <Select
+                        defaultValue={0}
+                        style={{ width: '100%' }}
+                        key={`select-${index}`}
+                      >
+                        {item.treatments?.map((item, index) => (
+                          <Option value={index}>{item.subName}</Option>
+                        ))}
+                      </Select>
+                    </div>
+                  </>
+                ) : item.type === 1 ? (
+                  <>
+                    <label
+                      htmlFor="item_type"
+                      className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                    >
+                      {item.name}:
+                    </label>
+                    <div className="w-2/3">
+                      <Radio.Group
+                        defaultValue={0}
+                        style={{ width: '100%' }}
+                        key={`radio-${index}`}
+                      >
+                        {item.treatments?.map((item, index) => (
+                          <Radio value={index}>{item.subName}</Radio>
+                        ))}
+                      </Radio.Group>
+                    </div>
+                  </>
+                ) : item.type === 2 ? (
+                  <>
+                    <label
+                      htmlFor="item_type"
+                      className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                    >
+                      {item.name}:
+                    </label>
+                    <div className="w-2/3">
+                      <Input style={{ width: '100%' }} />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <label
+                      htmlFor="item_type"
+                      className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                    >
+                      {item.name}:
+                    </label>
+                    <div className="w-2/3">
+                      <InputNumber min={1} max={10} style={{ width: '100%' }} />
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
             {/* ---------- Description of symptom ----------- */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex flex-row gap-4 items-center">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
@@ -426,10 +395,10 @@ const Rightbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* ---------- Duration of Symptoms ----------- */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex flex-row gap-4 items-center">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
@@ -499,10 +468,10 @@ const Rightbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* ---------- Medical History ----------- */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex flex-row gap-4 items-center">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
@@ -556,10 +525,10 @@ const Rightbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* ---------- Dental History ----------- */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex flex-row gap-4 items-center">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
@@ -594,10 +563,10 @@ const Rightbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* ---------- Pain Level ----------- */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex flex-row gap-4 items-center">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
@@ -627,10 +596,10 @@ const Rightbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* ---------- Allergies ----------- */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex flex-row gap-4 items-center">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
@@ -663,10 +632,10 @@ const Rightbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* ---------- Lifestyle Habits ----------- */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className="flex flex-row gap-4 items-center">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
@@ -749,7 +718,7 @@ const Rightbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

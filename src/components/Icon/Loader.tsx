@@ -5,6 +5,7 @@ const Loading = (
       fontSize: 24,
     }}
     spin
+    rev={undefined}
   />
 );
 
