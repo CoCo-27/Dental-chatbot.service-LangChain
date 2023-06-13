@@ -95,14 +95,15 @@ const Chat = ({ extraData }) => {
       save.push({ message: '...', flag: true });
       setArray(save);
 
-      const extraDATA = Object.entries(extraData).map(([key, value]) => ({
-        [key]: value,
-      }));
+      const extraDATA = Object.entries(extraData);
+      extraDATA.map((item) => console.log(item[0] + ':' + item[1]));
 
       const data = {
         value:
           isClicked === ''
-            ? formValue + ' -' + extraDATA.map((item) => item)
+            ? formValue +
+              '.\n' +
+              extraDATA.map((item) => ' - ' + item[0] + ':' + item[1])
             : isClicked,
         type: isClicked === '' ? false : true,
         email: localStorage.getItem('email')
