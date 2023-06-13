@@ -7,7 +7,7 @@ import greeting from '../../config/greeting';
 import { isEmpty } from 'src/utils/isEmpty';
 import { useNavigate } from 'react-router-dom';
 
-const Chat = () => {
+const Chat = ({ extraData }) => {
   const inputRef = useRef();
   const navigate = useNavigate();
   const langDetect = new LanguageDetect();
@@ -17,19 +17,14 @@ const Chat = () => {
       ? JSON.parse(localStorage.getItem('open_chat_history'))
       : [
           {
-            message:
-            greeting,
+            message: greeting,
             flag: true,
             isButton: false,
             language: 'english',
           },
         ]
   );
-  // const [history, setHistory] = useState(
-  //   JSON.parse(localStorage.getItem('chat_history'))
-  //     ? JSON.parse(localStorage.getItem('chat_history')) || []
-  //     : []
-  // );
+
   const [text, setText] = useState({
     data: '',
     type: false,
@@ -77,7 +72,6 @@ const Chat = () => {
     const result = lang_type
       .filter((item, index) => item[0] === 'english' || item[0] === 'german')
       .sort((a, b) => b[1] - a[1]);
-    console.log('werwer = ', result[0][0]);
 
     if (!localStorage.getItem('email') && isFree !== 1) {
       notification.warning({
@@ -99,13 +93,18 @@ const Chat = () => {
         flag: false,
       });
       save.push({ message: '...', flag: true });
-      // save_history.push([isClicked === '' ? formValue : isClicked, '...']);
       setArray(save);
-      // setHistory(save_history);
+
+      const extraDATA = Object.entries(extraData).map(([key, value]) => ({
+        [key]: value,
+      }));
+
       const data = {
-        value: isClicked === '' ? formValue : isClicked,
+        value:
+          isClicked === ''
+            ? formValue + ' -' + extraDATA.map((item) => item)
+            : isClicked,
         type: isClicked === '' ? false : true,
-        // history: save_history,
         email: localStorage.getItem('email')
           ? localStorage.getItem('email')
           : 'nothing',
@@ -121,7 +120,6 @@ const Chat = () => {
                 ? sentences[0]
                 : sentences[0].split('Answer:')[1];
             const questions = sentences[1].split('\n');
-            // save_history[save_history.length - 1][1] = answer;
             update[update.length - 1].message = answer;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
@@ -138,18 +136,11 @@ const Chat = () => {
               return update;
             });
           } else {
-            // save_history[save_history.length - 1][1] = res.data.data.text;
             update[update.length - 1].message = res.data.data.text;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
             update[update.length - 1].language = result[0][0];
           }
-          // const limitHistory =
-          //   save_history.length > 6
-          //     ? save_history.shift()
-          //     : save_history.slice();
-          // setHistory(limitHistory);
-          // localStorage.setItem('chat_history', JSON.stringify(limitHistory));
           setArray(update);
           localStorage.setItem('open_chat_history', JSON.stringify(update));
           setIsFree(isFree + 1);
