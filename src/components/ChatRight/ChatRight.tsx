@@ -81,7 +81,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
             <path d="m13 13-3-2.25L7 13V4H6v16h12V4h-5z" opacity=".3"></path>
             <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4zm9 16H6V4h1v9l3-2.25L13 13V4h5v16z"></path>
           </svg>
-          <h5 className="text-black font-bold text-2xl">Treatment</h5>
+          <h5 className="text-black font-bold text-2xl">Behandlung</h5>
         </div>
         <div className="flex flex-col">
           <div className="p-2 flex items-center gap-2">
@@ -153,8 +153,9 @@ const Rightbar = ({ extraData, setExtraData }) => {
             </svg>
           </div>
           <span className="text-black text-base">
-            After you start your conversation, Dental Chatbot will collect
-            research materials here. Please select treatment you want above
+            Nachdem Sie Ihre Unterhaltung gestartet haben, wird WunschlachenAI
+            weitere Informationen anzeigen. Bitte wählen Sie oben die gewünschte
+            Behandlung aus. Sollten Sie keine direkten Fragen haben.
           </span>
         </div>
       </div>
@@ -177,7 +178,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
             <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-3h2v5h-2V4zm0 12H9v2H7v-2H5v-2h2v-2h2v2h2v2zm2-1.5V13h6v1.5h-6zm0 3V16h4v1.5h-4z"></path>
           </svg>
           <h5 className="text-black font-bold text-2xl pt-2">
-            Description of symptom
+            Beschreibung der Symptome
           </h5>
           <div className="flex justify-center items-center pt-2">
             {isOpen ? (

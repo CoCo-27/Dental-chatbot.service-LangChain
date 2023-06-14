@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import LanguageDetect from 'languagedetect';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import uploadServices from 'src/services/uploadServices';
+import historyServices from 'src/services/historyServices';
 import greeting from '../../config/greeting';
 import { isEmpty } from 'src/utils/isEmpty';
 import { useNavigate } from 'react-router-dom';
@@ -96,15 +97,17 @@ const Chat = ({ extraData }) => {
       setArray(save);
 
       const extraDATA = Object.entries(extraData);
-      extraDATA.map((item) => console.log(item[0] + ':' + item[1]));
+
+      const ratingData = {
+        value: isClicked === '' ? formValue : isClicked,
+        rating: '',
+      };
+
+      historyServices.addQuestion(ratingData);
 
       const data = {
-        value:
-          isClicked === ''
-            ? formValue +
-              '.\n' +
-              extraDATA.map((item) => ' - ' + item[0] + ':' + item[1])
-            : isClicked,
+        value: isClicked === '' ? formValue : isClicked,
+        extra: extraDATA,
         type: isClicked === '' ? false : true,
         email: localStorage.getItem('email')
           ? localStorage.getItem('email')
