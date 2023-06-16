@@ -65,7 +65,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
   return (
     <Menu>
       <div
-        className={`fixed w-full flex text-navy-700 items-center font-semibold justify-between bg-gradient-to-r from-[#f5f5f5] to-teal-100 shadow-md z-50 px-3 transition-all duration-300 h-[90px]
+        className={`fixed w-full flex text-navy-700 items-center font-semibold justify-between bg-gradient-to-r from-[#f5f5f5] to-teal-100 shadow-md z-50 px-20 transition-all duration-300 h-[90px]
 			`}
       >
         <img
@@ -77,10 +77,10 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
         />
 
         <div className="flex justify-between">
-          <div className="hidden mobile:block">
+          <div className="hidden 2xl:block">
             {location.pathname !== '/login' && (
               <div
-                className={`flex gap-8 h-fit items-center ${
+                className={`flex gap-[10px] h-fit items-center ${
                   location.pathname === '/login' && 'hidden'
                 }`}
               >
@@ -90,7 +90,13 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
                     <div
                       key={item.id}
                       onClick={() => handleGoPage(item.id)}
-                      className="cursor-pointer rounded hover:bg-[#1976d22f] px-2 py-1 transition-all duration-150 ease-out"
+                      className={`cursor-pointer rounded px-[30px] py-[11.5px] transition-all duration-150 ease-out
+                        ${
+                          item.id === 'contact'
+                            ? 'bg-[#F480AE] hover:bg-[#f2699f]'
+                            : 'bg-[#BAE6EA] hover:bg-[#a6dfe4]'
+                        } 
+                      `}
                     >
                       <div
                         key={item.id}
@@ -103,7 +109,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
 
                 {logFlag === 'true' ? (
                   <button
-                    className={` ml-10 mr-5 flex w-44 rounded-lg bg-[#1976d2] p-3 py-3 px-6 text-lg text-white font-semibold text-txGray shadow-sm hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.3),0_4px_18px_0_rgba(51,45,45,0.2)] lg:ml-32 xl:my-auto xl:ml-0 justify-center`}
+                    className={` flex rounded bg-[#F480AE] px-[30px] py-[10px] shadow-sm hover:bg-[#f2699f] hover:shadow-[0_8px_9px_-4px_rgba(51,45,45,0.3),0_4px_18px_0_rgba(51,45,45,0.2)] justify-center`}
                     onClick={() => handleGoPage('logOut')}
                   >
                     <svg
@@ -143,7 +149,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
           </div>
           {location.pathname !== '/login' && (
             <div className="relative">
-              <div className="flex mobile:hidden bg-gray-100">
+              <div className="flex 2xl:hidden bg-gray-100">
                 <Menu.Button
                   // onClick={() => setIsOpen(!isOpen)}
                   className="bg-gray-200 inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-white"
@@ -196,7 +202,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
                 leaveTo="transform opacity-0 scale-95"
               >
                 {(ref) => (
-                  <div className="mobile:hidden" id="mobile-menu">
+                  <div className="2xl:hidden" id="mobile-menu">
                     <div
                       ref={ref}
                       className="px-2 top-[25px] right-[-11px] absolute pb-3 space-y-3 -px-5 bg-gray-100"
