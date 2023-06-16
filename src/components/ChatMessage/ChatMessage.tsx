@@ -105,7 +105,7 @@ const ChatMessage = (props) => {
                     </div>
                     {isVisible && (
                       <p className={isVisible ? 'fade-in' : 'fade-out'}>
-                        Give me just a moment
+                        Einen kleinen Augenblick bitte
                       </p>
                     )}
                   </div>
