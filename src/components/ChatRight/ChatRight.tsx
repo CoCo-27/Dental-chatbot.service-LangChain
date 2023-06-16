@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Select, Radio, Input, InputNumber } from 'antd';
-import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import treatmentServices from 'src/services/treatmentServices';
 import itemServices from 'src/services/itemServices';
 import { isEmpty } from 'src/utils/isEmpty';
@@ -164,35 +164,39 @@ const Rightbar = ({ extraData, setExtraData }) => {
         className={`w-full flex flex-col ${isOpen ? 'overflow-y-auto' : ''}`}
       >
         <div
-          className="flex flex-row gap-4 items-center cursor-pointer select-none"
+          className="flex flex-row items-center justify-between cursor-pointer select-none pr-8"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <svg
-            className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
-            focusable="false"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-            data-testid="MedicalInformationIcon"
-            width={'2rem'}
-            height={'2rem'}
-            fill="#1976d2"
-          >
-            <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-3h2v5h-2V4zm0 12H9v2H7v-2H5v-2h2v-2h2v2h2v2zm2-1.5V13h6v1.5h-6zm0 3V16h4v1.5h-4z"></path>
-          </svg>
-          <h5 className="text-black font-bold text-2xl pt-2">
-            Beschreibung der Symptome
-          </h5>
+          <div className="flex gap-4 items-center justify-center">
+            <svg
+              className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="MedicalInformationIcon"
+              width={'2rem'}
+              height={'2rem'}
+              fill="#1976d2"
+            >
+              <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-3h2v5h-2V4zm0 12H9v2H7v-2H5v-2h2v-2h2v2h2v2zm2-1.5V13h6v1.5h-6zm0 3V16h4v1.5h-4z"></path>
+            </svg>
+            <h5 className="text-black font-bold text-2xl pt-2">
+              Beschreibung der Symptome
+            </h5>
+          </div>
           <div className="flex justify-center items-center">
             {isOpen ? (
-              <CaretUpOutlined
+              <DownOutlined
                 style={{
                   cursor: 'pointer',
+                  width: '0.8em',
+                  height: '0.8em',
                 }}
                 rev={undefined}
               />
             ) : (
-              <CaretDownOutlined
-                style={{ cursor: 'pointer' }}
+              <UpOutlined
+                style={{ cursor: 'pointer', width: '0.8em', height: '0.8em' }}
                 rev={undefined}
               />
             )}
