@@ -63,7 +63,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
 
   return (
     <div
-      className={`flex h-full w-full flex-none flex-col bg-white p-4 gap-4 text-[14px] transition-all sm:relative overflow-hidden`}
+      className={`flex h-full w-full flex-none flex-col bg-[#FEF6E4] rounded p-8 gap-8 text-[20px] text-[#00185A] transition-all sm:relative overflow-hidden`}
     >
       {/* ---------- Treatment --------------*/}
       <div className="flex flex-col">
@@ -90,7 +90,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
                 <></>
               ) : (
                 <Select
-                  defaultValue={0}
+                  defaultValue={'Choose'}
                   style={{ width: '100%' }}
                   onChange={handleTreat_Type}
                 >
@@ -104,7 +104,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
               <div className="flex items-center gap-4">
                 {!isEmpty(treatmentArray[treat_type]?.treatments) && (
                   <Select
-                    defaultValue={0}
+                    defaultValue={'Choose'}
                     style={{ width: '50%' }}
                     onChange={handleSubName}
                   >
@@ -122,7 +122,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
                     treatmentArray[treat_type]?.treatments[subNameList]
                       ?.subtreatments
                   ) && (
-                    <Select defaultValue={0} style={{ width: '50%' }}>
+                    <Select defaultValue={'Choose'} style={{ width: '50%' }}>
                       {treatmentArray[treat_type]?.treatments[
                         subNameList
                       ]?.subtreatments?.map((item, index) => (
@@ -160,7 +160,9 @@ const Rightbar = ({ extraData, setExtraData }) => {
         </div>
       </div>
 
-      <div className="w-full flex flex-col overflow-y-auto">
+      <div
+        className={`w-full flex flex-col ${isOpen ? 'overflow-y-auto' : ''}`}
+      >
         <div
           className="flex flex-row gap-4 items-center cursor-pointer select-none"
           onClick={() => setIsOpen(!isOpen)}
@@ -180,18 +182,17 @@ const Rightbar = ({ extraData, setExtraData }) => {
           <h5 className="text-black font-bold text-2xl pt-2">
             Beschreibung der Symptome
           </h5>
-          <div className="flex justify-center items-center pt-2">
+          <div className="flex justify-center items-center">
             {isOpen ? (
               <CaretUpOutlined
                 style={{
-                  height: '20px',
                   cursor: 'pointer',
                 }}
                 rev={undefined}
               />
             ) : (
               <CaretDownOutlined
-                style={{ height: '20px', cursor: 'pointer' }}
+                style={{ cursor: 'pointer' }}
                 rev={undefined}
               />
             )}
@@ -216,7 +217,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
                     </label>
                     <div className="w-2/3">
                       <Select
-                        defaultValue={0}
+                        defaultValue={'Choose'}
                         style={{ width: '100%' }}
                         key={`select-${index}`}
                         onChange={(value) =>

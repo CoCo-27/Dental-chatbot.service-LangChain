@@ -153,7 +153,7 @@ const Chat = ({ extraData }) => {
           console.log(err);
           const update = save.slice();
           update[update.length - 1].message =
-            'Please wait. Dental Assistant are not yet trained';
+            'Bitte warten. WUNSCHLACHEN AI ist in diesem Bereich noch nicht trainiert.';
           update[update.length - 1].flag = true;
           setArray(update);
           notification.error({
