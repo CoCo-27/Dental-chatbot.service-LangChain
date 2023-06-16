@@ -90,7 +90,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
                 <></>
               ) : (
                 <Select
-                  defaultValue={'Choose'}
+                  defaultValue={'Bitte wählen'}
                   style={{ width: '100%' }}
                   onChange={handleTreat_Type}
                 >
@@ -104,7 +104,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
               <div className="flex items-center gap-4">
                 {!isEmpty(treatmentArray[treat_type]?.treatments) && (
                   <Select
-                    defaultValue={'Choose'}
+                    defaultValue={'Bitte wählen'}
                     style={{ width: '50%' }}
                     onChange={handleSubName}
                   >
@@ -122,7 +122,10 @@ const Rightbar = ({ extraData, setExtraData }) => {
                     treatmentArray[treat_type]?.treatments[subNameList]
                       ?.subtreatments
                   ) && (
-                    <Select defaultValue={'Choose'} style={{ width: '50%' }}>
+                    <Select
+                      defaultValue={'Bitte wählen'}
+                      style={{ width: '50%' }}
+                    >
                       {treatmentArray[treat_type]?.treatments[
                         subNameList
                       ]?.subtreatments?.map((item, index) => (
@@ -221,7 +224,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
                     </label>
                     <div className="w-2/3">
                       <Select
-                        defaultValue={'Choose'}
+                        defaultValue={'Bitte wählen'}
                         style={{ width: '100%' }}
                         key={`select-${index}`}
                         onChange={(value) =>
