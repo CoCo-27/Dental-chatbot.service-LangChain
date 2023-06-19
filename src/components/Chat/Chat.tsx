@@ -4,27 +4,14 @@ import LanguageDetect from 'languagedetect';
 import ChatMessage from '../ChatMessage/ChatMessage';
 import uploadServices from 'src/services/uploadServices';
 import historyServices from 'src/services/historyServices';
-import greeting from '../../config/greeting';
 import { isEmpty } from 'src/utils/isEmpty';
 import { useNavigate } from 'react-router-dom';
 
-const Chat = ({ extraData, extraQus }) => {
+const Chat = ({ extraData, array, setArray }) => {
   const inputRef = useRef();
   const navigate = useNavigate();
   const langDetect = new LanguageDetect();
   const [formValue, setFormValue] = useState('');
-  const [array, setArray] = useState(
-    JSON.parse(localStorage.getItem('open_chat_history'))
-      ? JSON.parse(localStorage.getItem('open_chat_history'))
-      : [
-          {
-            message: greeting,
-            flag: true,
-            isButton: false,
-            language: 'english',
-          },
-        ]
-  );
 
   const [text, setText] = useState({
     data: '',
@@ -97,7 +84,6 @@ const Chat = ({ extraData, extraQus }) => {
       setArray(save);
 
       const extraDATA = Object.entries(extraData);
-      const extraQUS = Object.entries(extraQus);
       const ratingData = {
         value: isClicked === '' ? formValue : isClicked,
         rating: '',
@@ -108,7 +94,6 @@ const Chat = ({ extraData, extraQus }) => {
       const data = {
         value: isClicked === '' ? formValue : isClicked,
         extra: extraDATA,
-        extraQUS: extraQUS,
         type: isClicked === '' ? false : true,
         email: localStorage.getItem('email')
           ? localStorage.getItem('email')
@@ -119,23 +104,11 @@ const Chat = ({ extraData, extraQus }) => {
         .then((res) => {
           const update = save.slice();
           if (res.data.type === false) {
-            const sentences1 = res.data.result1.text;
-            const sentences2 = res.data.result2.text;
-            const questions = sentences2.split('\n');
-            console.log('qus = ', questions);
+            const sentences1 = res.data.data.text;
             update[update.length - 1].message = sentences1;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
             update[update.length - 1].language = result[0][0];
-            questions.map((item) => {
-              update.push({
-                message: item.replace(/[0-9]/g, '').replace('.', ''),
-                flag: false,
-                isButton: true,
-                language: result[0][0],
-              });
-              return update;
-            });
           } else {
             update[update.length - 1].message = res.data.data.text;
             update[update.length - 1].flag = true;
