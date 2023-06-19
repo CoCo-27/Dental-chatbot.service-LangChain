@@ -119,15 +119,15 @@ const Chat = ({ extraData, extraQus }) => {
         .then((res) => {
           const update = save.slice();
           if (res.data.type === false) {
-            const sentences = res.data.result.text;
             const sentences1 = res.data.result1.text;
-            const questions = sentences1.split('\n');
+            const sentences2 = res.data.result2.text;
+            const questions = sentences2.split('\n');
             console.log('qus = ', questions);
-            update[update.length - 1].message = sentences;
+            update[update.length - 1].message = sentences1;
             update[update.length - 1].flag = true;
             update[update.length - 1].isButton = false;
             update[update.length - 1].language = result[0][0];
-            questions.map((item, index) => {
+            questions.map((item) => {
               update.push({
                 message: item.replace(/[0-9]/g, '').replace('.', ''),
                 flag: false,
