@@ -8,7 +8,7 @@ import greeting from '../../config/greeting';
 import { isEmpty } from 'src/utils/isEmpty';
 import { useNavigate } from 'react-router-dom';
 
-const Chat = ({ extraData }) => {
+const Chat = ({ extraData, extraQus }) => {
   const inputRef = useRef();
   const navigate = useNavigate();
   const langDetect = new LanguageDetect();
@@ -97,7 +97,7 @@ const Chat = ({ extraData }) => {
       setArray(save);
 
       const extraDATA = Object.entries(extraData);
-
+      const extraQUS = Object.entries(extraQus);
       const ratingData = {
         value: isClicked === '' ? formValue : isClicked,
         rating: '',
@@ -108,6 +108,7 @@ const Chat = ({ extraData }) => {
       const data = {
         value: isClicked === '' ? formValue : isClicked,
         extra: extraDATA,
+        extraQUS: extraQUS,
         type: isClicked === '' ? false : true,
         email: localStorage.getItem('email')
           ? localStorage.getItem('email')

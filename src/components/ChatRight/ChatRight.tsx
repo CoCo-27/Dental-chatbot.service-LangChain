@@ -5,16 +5,15 @@ import treatmentServices from 'src/services/treatmentServices';
 import itemServices from 'src/services/itemServices';
 import { isEmpty } from 'src/utils/isEmpty';
 
-const Rightbar = ({ extraData, setExtraData }) => {
+const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
   const { Option } = Select;
   const [isOpen, setIsOpen] = useState(false);
   const [treatmentArray, setTreatmentArray] = useState([]);
   const [itemArray, setItemArray] = useState([]);
-  const [treat_type, setTreat_Type] = useState(0);
+  const [treat_type, setTreat_Type] = useState(-1);
   const [subNameList, setSubNameList] = useState(0);
 
   useEffect(() => {
-    console.log(extraData);
     treatmentServices
       .getItems()
       .then((res) => {
@@ -32,9 +31,28 @@ const Rightbar = ({ extraData, setExtraData }) => {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleTreat_Type = (value) => {};
+  const handleTreat_Type = (value) => {
+    console.log('Treat = ', value);
+    setTreat_Type(value);
+    setSubNameList(0);
+    setExtraQus({ ...extraQus, treatType: treatmentArray[value].name });
+  };
+
   const handleSubName = (value) => {
     setSubNameList(value);
+    setExtraQus({
+      ...extraQus,
+      subTreat: treatmentArray[treat_type].treatments[value].subName,
+    });
+  };
+
+  const handleValue = (value) => {
+    setExtraQus({
+      ...extraQus,
+      value:
+        treatmentArray[treat_type].treatments[subNameList].subtreatments[value]
+          .value,
+    });
   };
 
   const handleSelect = (index, name, array) => {
@@ -90,7 +108,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
                 <></>
               ) : (
                 <Select
-                  defaultValue={'Bitte wählen'}
+                  defaultValue={treat_type === -1 ? 'Bitte wählen' : treat_type}
                   style={{ width: '100%' }}
                   onChange={handleTreat_Type}
                 >
@@ -104,7 +122,7 @@ const Rightbar = ({ extraData, setExtraData }) => {
               <div className="flex items-center gap-4">
                 {!isEmpty(treatmentArray[treat_type]?.treatments) && (
                   <Select
-                    defaultValue={'Bitte wählen'}
+                    value={subNameList}
                     style={{ width: '50%' }}
                     onChange={handleSubName}
                   >
@@ -123,8 +141,9 @@ const Rightbar = ({ extraData, setExtraData }) => {
                       ?.subtreatments
                   ) && (
                     <Select
-                      defaultValue={'Bitte wählen'}
+                      defaultValue={0}
                       style={{ width: '50%' }}
+                      onChange={handleValue}
                     >
                       {treatmentArray[treat_type]?.treatments[
                         subNameList
