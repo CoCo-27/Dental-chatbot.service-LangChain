@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { Select, Radio, Input, InputNumber } from 'antd';
+import { Select, Radio, Input, InputNumber, Spin } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import uploadServices from 'src/services/uploadServices';
 import treatmentServices from 'src/services/treatmentServices';
 import itemServices from 'src/services/itemServices';
 import { isEmpty } from 'src/utils/isEmpty';
+import Loading from '../Icon/Loader';
 
-const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
+const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
   const { Option } = Select;
+  const [loadingSubName, setLoadingSubName] = useState(false);
+  const [loadingValue, setLoadingValue] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [treatmentArray, setTreatmentArray] = useState([]);
   const [itemArray, setItemArray] = useState([]);
   const [treat_type, setTreat_Type] = useState(-1);
   const [subNameList, setSubNameList] = useState(-1);
   const [subValue, setSubValue] = useState(-1);
+  const [extraQus, setExtraQus] = useState(null);
 
   useEffect(() => {
     treatmentServices
@@ -47,16 +52,79 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
       treat_type: treatmentArray[value].name,
       subTreat: treatmentArray[treat_type].treatments[value].subName,
     });
+    if (isEmpty(treatmentArray[treat_type].treatments[value].subtreatments)) {
+      setLoadingSubName(true);
+      const data = {
+        treat_type: treatmentArray[value].name,
+        subTreat: treatmentArray[treat_type].treatments[value].subName,
+      };
+      uploadServices
+        .questionMessage(data)
+        .then((res) => {
+          setLoadingSubName(false);
+          console.log(res.data.data.text);
+          const update = array.slice();
+
+          const questions = res.data.data.text.split('\n');
+
+          questions.map((item) => {
+            update.push({
+              message: item.replace(/[0-9]/g, '').replace('.', ''),
+              flag: false,
+              isButton: true,
+              language: 'de ',
+            });
+            return update;
+          });
+          setArray(update);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoadingSubName(false);
+        });
+    }
   };
 
   const handleValue = (value) => {
     setSubValue(value);
     setExtraQus({
-      ...extraQus,
+      treat_type: treatmentArray[value].name,
+      subTreat: treatmentArray[treat_type].treatments[value].subName,
       value:
         treatmentArray[treat_type].treatments[subNameList].subtreatments[value]
           .value,
     });
+    setLoadingValue(true);
+    const data = {
+      treat_type: treatmentArray[value].name,
+      subTreat: treatmentArray[treat_type].treatments[value].subName,
+      value:
+        treatmentArray[treat_type].treatments[subNameList].subtreatments[value]
+          .value,
+    };
+    uploadServices
+      .questionMessage(data)
+      .then((res) => {
+        setLoadingValue(false);
+        const update = array.slice();
+
+        const questions = res.data.data.text.split('\n');
+
+        questions.map((item) => {
+          update.push({
+            message: item.replace(/[0-9]/g, '').replace('.', ''),
+            flag: false,
+            isButton: true,
+            language: 'de ',
+          });
+          return update;
+        });
+        setArray(update);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoadingValue(false);
+      });
   };
 
   const handleSelect = (index, name, array) => {
@@ -106,60 +174,73 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
           <h5 className="text-black font-bold text-2xl">Behandlung</h5>
         </div>
         <div className="flex flex-col">
-          <div className="p-2 flex items-center gap-2">
-            <div className="w-full flex flex-col gap-4">
-              {treatmentArray.length === 0 ? (
-                <></>
-              ) : (
-                <Select
-                  defaultValue={treat_type === -1 ? 'Bitte wählen' : treat_type}
-                  style={{ width: '100%' }}
-                  onChange={handleTreat_Type}
-                >
-                  {treatmentArray?.map((item, index) => (
-                    <Option key={index} value={index}>
-                      {item.name}
-                    </Option>
-                  ))}
-                </Select>
-              )}
-              <div className="flex items-center gap-4">
-                {!isEmpty(treatmentArray[treat_type]?.treatments) && (
+          <div className="p-2 flex items-center gap-2 justify-center">
+            {loadingSubName === true || loadingValue === true ? (
+              <Spin
+                indicator={Loading}
+                style={{
+                  color: 'blue',
+                  width: '1.5rem',
+                  height: '1.5rem',
+                }}
+              />
+            ) : (
+              <div className="w-full flex flex-col gap-4">
+                {treatmentArray.length === 0 ? (
+                  <></>
+                ) : (
                   <Select
-                    value={subNameList === -1 ? 'Bitte wählen' : subNameList}
-                    style={{ width: '50%' }}
-                    onChange={handleSubName}
+                    defaultValue={
+                      treat_type === -1 ? 'Bitte wählen' : treat_type
+                    }
+                    style={{ width: '100%' }}
+                    onChange={handleTreat_Type}
                   >
-                    {treatmentArray[treat_type]?.treatments.map(
-                      (item, index) => (
-                        <Option key={index} value={index}>
-                          {item.subName}
-                        </Option>
-                      )
-                    )}
+                    {treatmentArray?.map((item, index) => (
+                      <Option key={index} value={index}>
+                        {item.name}
+                      </Option>
+                    ))}
                   </Select>
                 )}
-                {treatmentArray[treat_type]?.treatments &&
-                  !isEmpty(
-                    treatmentArray[treat_type]?.treatments[subNameList]
-                      ?.subtreatments
-                  ) && (
+                <div className="flex items-center gap-4">
+                  {!isEmpty(treatmentArray[treat_type]?.treatments) && (
                     <Select
-                      value={subValue === -1 ? 'Bitte wählen' : subValue}
+                      value={subNameList === -1 ? 'Bitte wählen' : subNameList}
                       style={{ width: '50%' }}
-                      onChange={handleValue}
+                      onChange={handleSubName}
                     >
-                      {treatmentArray[treat_type]?.treatments[
-                        subNameList
-                      ]?.subtreatments?.map((item, index) => (
-                        <Option key={index} value={index}>
-                          {item.value}
-                        </Option>
-                      ))}
+                      {treatmentArray[treat_type]?.treatments.map(
+                        (item, index) => (
+                          <Option key={index} value={index}>
+                            {item.subName}
+                          </Option>
+                        )
+                      )}
                     </Select>
                   )}
+                  {treatmentArray[treat_type]?.treatments &&
+                    !isEmpty(
+                      treatmentArray[treat_type]?.treatments[subNameList]
+                        ?.subtreatments
+                    ) && (
+                      <Select
+                        value={subValue === -1 ? 'Bitte wählen' : subValue}
+                        style={{ width: '50%' }}
+                        onChange={handleValue}
+                      >
+                        {treatmentArray[treat_type]?.treatments[
+                          subNameList
+                        ]?.subtreatments?.map((item, index) => (
+                          <Option key={index} value={index}>
+                            {item.value}
+                          </Option>
+                        ))}
+                      </Select>
+                    )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

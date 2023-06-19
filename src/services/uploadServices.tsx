@@ -25,6 +25,10 @@ const requestMessage = (value) => {
   return axios.post(backend_api + 'upload/requestMessage', value);
 };
 
+const questionMessage = (value) => {
+  return axios.post(backend_api + 'upload/questionMessage', value);
+};
+
 const faqMessage = (value) => {
   return axios.post(backend_api + 'upload/faqMessage', value);
 };
@@ -34,6 +38,7 @@ const object = {
   getPrompt,
   embedding,
   requestMessage,
+  questionMessage,
   faqMessage,
 };
 
