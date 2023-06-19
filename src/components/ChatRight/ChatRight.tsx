@@ -12,6 +12,7 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
   const [itemArray, setItemArray] = useState([]);
   const [treat_type, setTreat_Type] = useState(-1);
   const [subNameList, setSubNameList] = useState(0);
+  const [subValue, setSubValue] = useState(0);
 
   useEffect(() => {
     treatmentServices
@@ -35,11 +36,13 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
     console.log('Treat = ', value);
     setTreat_Type(value);
     setSubNameList(0);
+    setSubValue(0);
     setExtraQus({ ...extraQus, treatType: treatmentArray[value].name });
   };
 
   const handleSubName = (value) => {
     setSubNameList(value);
+    setSubValue(0);
     setExtraQus({
       ...extraQus,
       subTreat: treatmentArray[treat_type].treatments[value].subName,
@@ -47,6 +50,7 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
   };
 
   const handleValue = (value) => {
+    setSubValue(value);
     setExtraQus({
       ...extraQus,
       value:
@@ -141,7 +145,7 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
                       ?.subtreatments
                   ) && (
                     <Select
-                      defaultValue={0}
+                      value={subValue}
                       style={{ width: '50%' }}
                       onChange={handleValue}
                     >
