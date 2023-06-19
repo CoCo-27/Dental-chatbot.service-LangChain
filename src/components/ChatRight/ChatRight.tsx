@@ -11,8 +11,8 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
   const [treatmentArray, setTreatmentArray] = useState([]);
   const [itemArray, setItemArray] = useState([]);
   const [treat_type, setTreat_Type] = useState(-1);
-  const [subNameList, setSubNameList] = useState(0);
-  const [subValue, setSubValue] = useState(0);
+  const [subNameList, setSubNameList] = useState(-1);
+  const [subValue, setSubValue] = useState(-1);
 
   useEffect(() => {
     treatmentServices
@@ -35,16 +35,16 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
   const handleTreat_Type = (value) => {
     console.log('Treat = ', value);
     setTreat_Type(value);
-    setSubNameList(0);
-    setSubValue(0);
-    setExtraQus({ ...extraQus, treatType: treatmentArray[value].name });
+    setSubNameList(-1);
+    setSubValue(-1);
+    setExtraQus({ treatType: treatmentArray[value].name });
   };
 
   const handleSubName = (value) => {
     setSubNameList(value);
-    setSubValue(0);
+    setSubValue(-1);
     setExtraQus({
-      ...extraQus,
+      treat_type: treatmentArray[value].name,
       subTreat: treatmentArray[treat_type].treatments[value].subName,
     });
   };
@@ -126,7 +126,7 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
               <div className="flex items-center gap-4">
                 {!isEmpty(treatmentArray[treat_type]?.treatments) && (
                   <Select
-                    value={subNameList}
+                    value={subNameList === -1 ? 'Bitte wählen' : subNameList}
                     style={{ width: '50%' }}
                     onChange={handleSubName}
                   >
@@ -145,7 +145,7 @@ const Rightbar = ({ extraData, setExtraData, extraQus, setExtraQus }) => {
                       ?.subtreatments
                   ) && (
                     <Select
-                      value={subValue}
+                      value={subValue === -1 ? 'Bitte wählen' : subValue}
                       style={{ width: '50%' }}
                       onChange={handleValue}
                     >
