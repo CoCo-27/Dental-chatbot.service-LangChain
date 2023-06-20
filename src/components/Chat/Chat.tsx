@@ -64,7 +64,7 @@ const Chat = ({ extraData, array, setArray }) => {
     if (!localStorage.getItem('email') && isFree !== 1) {
       notification.warning({
         message: '',
-        description: 'You have to register for more then one question',
+        description: 'Sie müssen sich für mehr als eine Frage registrieren',
         duration: 2,
         style: {
           width: 440,

@@ -40,7 +40,7 @@ const Login = () => {
         );
         console.log(save_user);
         notification.success({
-          description: 'Login Success',
+          description: 'Login erfolgreich',
           message: '',
         });
         setGoogleFlag(false);
@@ -59,12 +59,12 @@ const Login = () => {
         ) {
           notification.info({
             description:
-              'The current doamin is not active. Set up a live domain.',
+              'Das aktuelle Doamin ist nicht aktiv. Richten Sie eine Live-Domain ein.',
             message: '',
           });
         } else {
           notification.error({
-            description: 'Firebase error',
+            description: 'Firebase-Fehler',
             message: '',
           });
         }
@@ -105,7 +105,7 @@ const Login = () => {
             });
           } else {
             notification.error({
-              description: 'Login Error',
+              description: 'Login Fehler',
               message: '',
             });
           }
@@ -121,7 +121,7 @@ const Login = () => {
         .authRegister(data)
         .then((result) => {
           notification.success({
-            description: 'Register Success',
+            description: 'Erfolgreich registriert',
             message: '',
           });
           setLoading(false);
@@ -136,7 +136,7 @@ const Login = () => {
             });
           } else {
             notification.error({
-              description: 'Register Error',
+              description: 'Registrierungsfehler',
               message: '',
             });
           }

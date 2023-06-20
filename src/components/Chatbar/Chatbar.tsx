@@ -38,7 +38,7 @@ const Chatbar = ({ setHistoryFlag, setText, setLoading, setButtonFlag }) => {
       .signOut()
       .then(() => {
         notification.success({
-          description: 'Logout Success',
+          description: 'Erfolgreiche Abmeldung',
           message: '',
         });
         localStorage.clear();
@@ -63,7 +63,7 @@ const Chatbar = ({ setHistoryFlag, setText, setLoading, setButtonFlag }) => {
     if (!fileName) {
       setLoading(false);
       notification.info({
-        description: 'Please upload your PDF file',
+        description: 'Bitte laden Sie Ihre PDF-Datei hoch',
         message: '',
         duration: 2,
       });
@@ -87,7 +87,7 @@ const Chatbar = ({ setHistoryFlag, setText, setLoading, setButtonFlag }) => {
         .catch((err) => {
           localStorage.setItem('disable_flag', JSON.stringify(false));
           notification.error({
-            description: 'Something went wrong',
+            description: 'Etwas ist schief gelaufen',
             message: '',
             duration: 2,
           });

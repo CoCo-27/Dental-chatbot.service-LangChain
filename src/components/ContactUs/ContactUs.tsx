@@ -22,7 +22,7 @@ const ContactUs = () => {
         setLoading(false);
         notification.success({
           message: '',
-          description: 'Message sent successfully',
+          description: 'Nachricht erfolgreich gesendet',
           duration: 2,
         });
       })
@@ -31,7 +31,7 @@ const ContactUs = () => {
         setLoading(false);
         notification.error({
           message: '',
-          description: 'Something went wrong',
+          description: 'Etwas ist schief gelaufen',
           duration: 2,
         });
       });
@@ -55,7 +55,7 @@ const ContactUs = () => {
         "
       >
         <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
-        Kontaktiere uns jetzt
+          Kontaktiere uns jetzt
         </div>
         <div className="mt-10">
           <form ref={form} onSubmit={handleSubmit}>
