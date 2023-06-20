@@ -82,42 +82,16 @@ const FAQChatbot = () => {
     setArray(save);
     const data = {
       value: isClicked === '' ? formValue : isClicked,
-      type: isClicked === '' ? false : true,
     };
     uploadServices
       .faqMessage(data)
       .then((res) => {
         console.log(res.data.data.text);
         const update = save.slice();
-        if (res.data.type === false) {
-          const sentences = res.data.data.text.split('!@#$%^&*())(*&^%$#@!');
-          const answer =
-            sentences[0].search('Answer:') === -1
-              ? sentences[0]
-              : sentences[0].split('Answer:')[1];
-          const questions = sentences[1].split('\n');
-
-          update[update.length - 1].message = answer;
-          update[update.length - 1].flag = true;
-          update[update.length - 1].isButton = false;
-          update[update.length - 1].language = result[0][0];
-          questions.map((item, index) => {
-            if (index > 1) {
-              update.push({
-                message: item.replace(/[0-9]/g, '').replace('.', ''),
-                flag: false,
-                isButton: true,
-                language: result[0][0],
-              });
-            }
-            return update;
-          });
-        } else {
-          update[update.length - 1].message = res.data.data.text;
-          update[update.length - 1].flag = true;
-          update[update.length - 1].isButton = false;
-          update[update.length - 1].language = result[0][0];
-        }
+        update[update.length - 1].message = res.data.data.text;
+        update[update.length - 1].flag = true;
+        update[update.length - 1].isButton = false;
+        update[update.length - 1].language = result[0][0];
         setArray(update);
         localStorage.setItem('faq_chat_history', JSON.stringify(update));
       })

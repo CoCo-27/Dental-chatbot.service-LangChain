@@ -359,7 +359,6 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
                       </label>
                       <div className="w-2/3">
                         <Radio.Group
-                          defaultValue={0}
                           style={{ width: '100%' }}
                           key={`radio-${index}`}
                           onChange={(e) =>
