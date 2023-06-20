@@ -155,18 +155,31 @@ const Login = () => {
           }}
         >
           <div className="absolute bg-gradient-to-b from-indigo-600 to-blue-500 opacity-75 inset-0 z-0"></div>
-          <div className="w-full  max-w-md z-10">
-            <div className="sm:text-4xl xl:text-5xl font-bold leading-tight mb-6">
-              Welcome to our dental assistant..
+          <div className="w-full  max-w-2xl z-10">
+            <div className="sm:text-xl xl:text-xl font-bold leading-tight mb-6">
+              Herzlich willkommen bei WunschlachenAI, Ihrem persönlichen
+              Informationsportal für Dentalgesundheit! Unsere Plattform wurde
+              entwickelt, um Ihnen umfangreiche und leicht verständliche
+              Informationen zu verschiedenen zahnmedizinischen Themen zu
+              liefern.
             </div>
-            <div className="sm:text-sm xl:text-md text-gray-200 font-normal">
-              {' '}
-              Our dental assistant brings expertise in dental management,
-              business development, and patient experience. By working with our
-              consultant, you can expect greater revenue, enhanced patient
-              satisfaction, increased efficiency, and cost savings. Our
-              consultant takes an individualized approach to each dental
-              practice and designs a unique strategy that suits your needs.
+            <div className="sm:text-xl xl:text-xl leading-tight mb-6">
+              Melden Sie sich noch heute an und tauchen Sie ein in eine Welt
+              voller wertvoller und relevanter Informationen, die speziell auf
+              Ihre Bedürfnisse und Interessen abgestimmt sind. Bei
+              WunschlachenAI ist unser Hauptziel, Ihr Wissen zu erweitern und
+              Ihr Verständnis zu vertiefen.
+            </div>
+            <div className="sm:text-xl xl:text-xl leading-tight mb-6">
+              Von grundlegenden Informationen bis hin zu komplexen Themen –
+              WunschlachenAI ist eine gute Quelle für qualitativ hochwertige und
+              aktuelle Informationen.
+            </div>
+            <div className="sm:text-xl xl:text-xl leading-tight mb-6">
+              Erleben Sie mit WunschlachenAI, wie zugänglich und ansprechend die
+              Welt der Dentalgesundheit sein kann. Wir freuen uns darauf, Sie
+              auf Ihrem Weg zu mehr Wissen und einem strahlenden Lächeln zu
+              begleiten!
             </div>
           </div>
           <ul className="circles">
@@ -186,12 +199,12 @@ const Login = () => {
           <div className="max-w-md w-full space-y-8">
             <div className="text-center">
               <h2 className="mt-6 text-3xl font-bold text-gray-900">
-                Welcome!
+                Herzlich Willkommen!
               </h2>
               <p className="mt-2 text-sm text-gray-500">
                 {!loginFlag
-                  ? 'Please sign in to your account'
-                  : 'Please sign up'}
+                  ? 'Bitte melden Sie sich in Ihrem Konto an'
+                  : 'Bitte registrieren'}
               </p>
             </div>
             <div className="flex flex-row justify-center items-center space-x-3">
@@ -233,14 +246,12 @@ const Login = () => {
                   </div>
                 )}
 
-                <span className="ml-4">Sign In with Google</span>
+                <span className="ml-4">Anmelden mit Google</span>
               </button>
             </div>
             <div className="flex items-center gap-1 justify-center">
               <span className="h-px w-32 bg-gray-200"></span>
-              <span className="text-gray-300 font-normal">
-                or continue with
-              </span>
+              <span className="text-gray-300 font-normal">oder weiter mit</span>
               <span className="h-px w-32 bg-gray-200"></span>
             </div>
             <form className="mt-8 space-y-6" onSubmit={handleAuth}>
@@ -252,33 +263,33 @@ const Login = () => {
                   <>
                     <div className="mt-8 content-center">
                       <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide">
-                        First Name
+                        Vorname
                       </label>
                       <input
                         id="firstName"
                         required
                         className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                         type="first_name"
-                        placeholder="First Name"
+                        placeholder="Vorname"
                       />
                     </div>
                     <div className="mt-8 content-center">
                       <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide">
-                        Last Name
+                        Nachname
                       </label>
                       <input
                         id="lastName"
                         required
                         className="w-full text-base px-4 py-2 border-b border-gray-300 focus:outline-none rounded-2xl focus:border-indigo-500"
                         type="last_name"
-                        placeholder="Last Name"
+                        placeholder="Nachname"
                       />
                     </div>
                   </>
                 )}
                 <div className="mt-8 content-center">
                   <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide">
-                    Email
+                    E-Mail
                   </label>
                   <input
                     id="email"
@@ -291,7 +302,7 @@ const Login = () => {
               </div>
               <div className="mt-8 content-center">
                 <label className="ml-3 text-sm font-bold text-gray-700 tracking-wide">
-                  Password
+                  Passwort
                 </label>
                 <input
                   id="password"
@@ -314,12 +325,12 @@ const Login = () => {
                       htmlFor="remember_me"
                       className="ml-2 block text-sm text-gray-900"
                     >
-                      Remember me
+                      Erinnere mich
                     </label>
                   </div>
                   <div className="text-sm">
                     <div className="text-indigo-400 hover:text-blue-500 cursor-pointer">
-                      Forgot your password?
+                      Haben Sie Ihr Passwort vergessen?
                     </div>
                   </div>
                 </div>
@@ -342,21 +353,23 @@ const Login = () => {
                       }}
                     />
                   ) : !loginFlag ? (
-                    'Sign in'
+                    'Anmelden'
                   ) : (
-                    'Sign up'
+                    'Anmeldung'
                   )}
                 </button>
               </div>
               <p className="flex flex-col items-center justify-center mt-10 text-center text-md text-gray-500">
                 <span>
-                  {!loginFlag ? `Don't have an account?` : 'Have you account?'}
+                  {!loginFlag
+                    ? `Haben Sie kein Konto?`
+                    : 'Haben Sie ein Konto?'}
                 </span>
                 <div
                   className="text-indigo-400 hover:text-blue-500 no-underline hover:underline cursor-pointer transition ease-in duration-300"
                   onClick={() => setLoginFlag(!loginFlag)}
                 >
-                  {!loginFlag ? 'Sign up' : 'Sign in'}
+                  {!loginFlag ? 'Anmeldung' : 'Anmelden'}
                 </div>
               </p>
             </form>
