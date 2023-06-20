@@ -272,7 +272,7 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
         </div>
 
         <div
-          className={`w-full flex flex-col pb-4 ${
+          className={`w-full flex flex-col py-4 ${
             isOpen ? 'overflow-y-auto' : ''
           }`}
         >
@@ -420,15 +420,30 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center space-y-1 border-t border-black/20 text-sm"></div>
-      </div>
-      <div className="text-black text-base">
-        <p>Haben Sie Probleme oder Schmerzen?</p>
-        WunschlachenAI ist für Sie da. Wenn Sie über Beschwerden sprechen
-        möchten, wählen Sie bitte den entsprechenden Dialog oben aus. Sollten
-        Sie keine direkten Fragen haben, wird WunschlachenAI Ihnen
-        weiterführende Informationen anzeigen. Lassen Sie uns gemeinsam für Ihr
-        Wohlbefinden sorgen und den Weg zu einem schmerzfreien Lächeln gehen.
+        <div className="flex flex-col items-center space-y-1 border-t border-black/20 pb-4 text-sm"></div>
+        <div className="flex flex-row p-4 bg-[#e5f6fd] rounded-md">
+          <div className="flex w-12 h-12 pb-4 pr-4">
+            <svg
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1cw4hi4"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              data-testid="InfoOutlinedIcon"
+              fill="#1976d2"
+            >
+              <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"></path>
+            </svg>
+          </div>
+          <span className="text-black text-base">
+            <p>Haben Sie Probleme oder Schmerzen?</p>
+            WunschlachenAI ist für Sie da. Wenn Sie über Beschwerden sprechen
+            möchten, wählen Sie bitte den entsprechenden Dialog oben aus.
+            Sollten Sie keine direkten Fragen haben, wird WunschlachenAI Ihnen
+            weiterführende Informationen anzeigen. Lassen Sie uns gemeinsam für
+            Ihr Wohlbefinden sorgen und den Weg zu einem schmerzfreien Lächeln
+            gehen.
+          </span>
+        </div>
       </div>
     </div>
   );
