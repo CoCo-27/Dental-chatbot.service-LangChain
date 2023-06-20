@@ -20,8 +20,7 @@ const FAQChatbot = () => {
       ? JSON.parse(localStorage.getItem('faq_chat_history'))
       : [
           {
-            message:
-            greeting,
+            message: greeting,
             flag: true,
             isButton: false,
             language: 'english',
@@ -126,7 +125,7 @@ const FAQChatbot = () => {
         console.log(err);
         message.error({
           type: 'error',
-          content: 'Something went wrong',
+          content: 'Etwas ist schief gelaufen',
         });
       });
   };
@@ -135,7 +134,7 @@ const FAQChatbot = () => {
     <div className="flex-1 p:2 flex flex-col h-screen justify-between">
       <div className="bg-[#0071b2] flex sm:items-center justify-center p-6 border-b-2 border-gray-200">
         <span className="text-lg font-bold text-white">
-        Frage? Chatten Sie mit uns!
+          Frage? Chatten Sie mit uns!
         </span>
       </div>
       <div

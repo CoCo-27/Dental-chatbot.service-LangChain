@@ -30,7 +30,7 @@ const ForgotPassword = () => {
       .catch((error) => {
         setLoading(false);
         notification.error({
-          description: 'Something went Wrong',
+          description: 'Etwas ist schief gelaufen',
           message: '',
           duration: 2,
         });
