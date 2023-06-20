@@ -49,13 +49,13 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
     setSubNameList(value);
     setSubValue(-1);
     setExtraQus({
-      treat_type: treatmentArray[value].name,
+      treat_type: treatmentArray[treat_type].name,
       subTreat: treatmentArray[treat_type].treatments[value].subName,
     });
     if (isEmpty(treatmentArray[treat_type].treatments[value].subtreatments)) {
       setLoadingSubName(true);
       const data = {
-        treat_type: treatmentArray[value].name,
+        treat_type: treatmentArray[treat_type].name,
         subTreat: treatmentArray[treat_type].treatments[value].subName,
       };
       uploadServices
@@ -88,16 +88,16 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
   const handleValue = (value) => {
     setSubValue(value);
     setExtraQus({
-      treat_type: treatmentArray[value].name,
-      subTreat: treatmentArray[treat_type].treatments[value].subName,
+      treat_type: treatmentArray[treat_type].name,
+      subTreat: treatmentArray[treat_type].treatments[subNameList].subName,
       value:
         treatmentArray[treat_type].treatments[subNameList].subtreatments[value]
           .value,
     });
     setLoadingValue(true);
     const data = {
-      treat_type: treatmentArray[value].name,
-      subTreat: treatmentArray[treat_type].treatments[value].subName,
+      treat_type: treatmentArray[treat_type].name,
+      subTreat: treatmentArray[treat_type].treatments[subNameList].subName,
       value:
         treatmentArray[treat_type].treatments[subNameList].subtreatments[value]
           .value,
