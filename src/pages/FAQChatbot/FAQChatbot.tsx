@@ -82,6 +82,7 @@ const FAQChatbot = () => {
     setArray(save);
     const data = {
       value: isClicked === '' ? formValue : isClicked,
+      extra: Object.entries(JSON.parse(localStorage.getItem('extraData'))),
     };
     uploadServices
       .faqMessage(data)

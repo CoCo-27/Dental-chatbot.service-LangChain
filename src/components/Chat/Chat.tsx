@@ -8,6 +8,7 @@ import { isEmpty } from 'src/utils/isEmpty';
 import { useNavigate } from 'react-router-dom';
 
 const Chat = ({ extraData, array, setArray }) => {
+  localStorage.setItem('extraData', JSON.stringify(extraData));
   const inputRef = useRef();
   const navigate = useNavigate();
   const langDetect = new LanguageDetect();

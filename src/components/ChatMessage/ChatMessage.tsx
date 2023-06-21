@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import translate from 'translate';
 import historyServices from '../../services/historyServices';
+import WLIcon_1 from '../Icon/WLIcon_1';
 import './Message.css';
 
 const ChatMessage = (props) => {
@@ -55,8 +56,8 @@ const ChatMessage = (props) => {
     >
       {props.status === true ? (
         <div className="flex items-start group answer-in">
-          <div className="flex items-center justify-center px-1 xl:px-0 w-[40px] h-[40px] text-white text-xl rounded-full order-1 bg-[#84909d]">
-            WL
+          <div className="flex items-center justify-center px-1 xl:px-0 text-white text-xl rounded-full order-1">
+            <WLIcon_1 />
           </div>
           <div className="flex flex-row space-y-2 text-sm max-w-xl mx-2 order-1 items-start">
             <div className="relative top-[16px] left-[15px]">
@@ -208,12 +209,14 @@ const ChatMessage = (props) => {
                   </g>
                 </svg>
               </div>
-              <div className="bg-[#1976d2] w-[40px] h-[40px] flex items-center rounded-full order-2 p-1">
+              <div className="bg-[#1976d2] flex items-center rounded-full order-2 p-1">
                 <svg
                   className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiAvatar-fallback css-13y7ul3"
                   focusable="false"
                   aria-hidden="true"
                   viewBox="0 0 24 24"
+                  width={'30px'}
+                  height={'30px'}
                   data-testid="PersonIcon"
                 >
                   <path
