@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // import translate from 'translate';
-import WLIcon_1 from '../Icon/WLIcon_1';
+import WLIcon_2 from '../Icon/WLIcon_2';
 import './Message.css';
 
 const FAQChatMessage = (props) => {
@@ -34,7 +34,7 @@ const FAQChatMessage = (props) => {
       {props.status === true ? (
         <div className="flex items-start group answer-in">
           <div className="flex items-center justify-center px-1 xl:px-0 text-white text-xl rounded-full order-1">
-            <WLIcon_1 />
+            <WLIcon_2 />
           </div>
           <div className="flex flex-row space-y-2 max-w-xl mx-2 order-1 items-start">
             <div className="relative top-[16px] left-[15px]">
