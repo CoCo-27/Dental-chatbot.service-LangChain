@@ -41,7 +41,7 @@ const Layout = () => {
       style={{ fontFamily: 'Poppins, sans-serif' }}
     >
       <Header menu="flex" isSmall={headerAnimation} />
-      <div className="flex justify-stretch h-100% pt-[90px] w-full relative overflow-x-hidden">
+      <div className="flex justify-stretch h-100% pt-[90px] w-full relative overflow-hidden">
         <Outlet />
       </div>
     </div>
