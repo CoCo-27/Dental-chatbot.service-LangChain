@@ -153,25 +153,30 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
 
   return (
     <div
-      className={`flex h-full w-full flex-none flex-col bg-[#FEF6E4] rounded p-8 gap-8 text-[20px] text-[#00185A] transition-all sm:relative overflow-y-auto`}
+      className={`flex h-full w-full flex-none flex-col bg-[#FEF6E4] rounded p-8 gap-8 text-[20px] text-[#00185A] transition-all overflow-y-auto`}
     >
       {/* ---------- Treatment --------------*/}
       <div className="flex flex-col bg-white rounded-lg p-4">
         <div className="flex flex-col">
           <div className="flex flex-row gap-4 items-center">
-            <svg
-              className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
-              focusable="false"
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              data-testid="BookTwoToneIcon"
-              width={'2rem'}
-              height={'2rem'}
-              fill="#1976d2"
-            >
-              <path d="m13 13-3-2.25L7 13V4H6v16h12V4h-5z" opacity=".3"></path>
-              <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4zm9 16H6V4h1v9l3-2.25L13 13V4h5v16z"></path>
-            </svg>
+            <div className="flex items-center justify-center">
+              <svg
+                className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
+                focusable="false"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                data-testid="BookTwoToneIcon"
+                width={'2rem'}
+                height={'2rem'}
+                fill="#1976d2"
+              >
+                <path
+                  d="m13 13-3-2.25L7 13V4H6v16h12V4h-5z"
+                  opacity=".3"
+                ></path>
+                <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4zm9 16H6V4h1v9l3-2.25L13 13V4h5v16z"></path>
+              </svg>
+            </div>
             <h5 className="text-black font-bold text-2xl">Behandlung</h5>
           </div>
           <div className="flex flex-col">
@@ -251,16 +256,18 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
         <div className="flex flex-col">
           <div className="flex flex-row p-4 bg-[#e5f6fd] rounded-md">
             <div className="flex w-12 h-12 pb-4 pr-4">
-              <svg
-                className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1cw4hi4"
-                focusable="false"
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                data-testid="InfoOutlinedIcon"
-                fill="#1976d2"
-              >
-                <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"></path>
-              </svg>
+              <div className="flex items-center justify-center">
+                <svg
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1cw4hi4"
+                  focusable="false"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  data-testid="InfoOutlinedIcon"
+                  fill="#1976d2"
+                >
+                  <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"></path>
+                </svg>
+              </div>
             </div>
             <span className="text-black text-base">
               Nachdem Sie Ihre Unterhaltung gestartet haben, wird WunschlachenAI
@@ -281,18 +288,20 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
             onClick={() => setIsOpen(!isOpen)}
           >
             <div className="flex gap-4 items-center justify-center">
-              <svg
-                className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
-                focusable="false"
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                data-testid="MedicalInformationIcon"
-                width={'2rem'}
-                height={'2rem'}
-                fill="#1976d2"
-              >
-                <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-3h2v5h-2V4zm0 12H9v2H7v-2H5v-2h2v-2h2v2h2v2zm2-1.5V13h6v1.5h-6zm0 3V16h4v1.5h-4z"></path>
-              </svg>
+              <div className="flex items-center justify-center">
+                <svg
+                  className="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-jxtyyz"
+                  focusable="false"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  data-testid="MedicalInformationIcon"
+                  width={'2rem'}
+                  height={'2rem'}
+                  fill="#1976d2"
+                >
+                  <path d="M20 7h-5V4c0-1.1-.9-2-2-2h-2c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-9-3h2v5h-2V4zm0 12H9v2H7v-2H5v-2h2v-2h2v2h2v2zm2-1.5V13h6v1.5h-6zm0 3V16h4v1.5h-4z"></path>
+                </svg>
+              </div>
               <h5 className="text-black font-bold text-2xl pt-2">
                 Beschreibung der Symptome
               </h5>

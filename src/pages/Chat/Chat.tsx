@@ -53,7 +53,7 @@ const Chat = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center max-[1024px]:w-full">
+      <div className="w-full h-full flex justify-center max-[1024px]:w-full">
         <div className="flex w-full xl:w-8/12">
           <ChatMiddle extraData={extraData} array={array} setArray={setArray} />
         </div>
@@ -62,7 +62,7 @@ const Chat = () => {
             showButton === false
               ? 'right-[-390px]'
               : showButton === true
-              ? 'right-0'
+              ? 'right-0 pb-[90px]'
               : ''
           }`}
         >
