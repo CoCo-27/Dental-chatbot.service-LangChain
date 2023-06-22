@@ -58,9 +58,9 @@ const Chat = () => {
           <ChatMiddle extraData={extraData} array={array} setArray={setArray} />
         </div>
         <div
-          className={`h-full w-[390px] flex xl:w-4/12 absolute xl:relative z-10 transition-all ${
+          className={`h-full w-[560px] flex xl:w-4/12 absolute xl:relative z-10 transition-all ${
             showButton === false
-              ? 'right-[-390px]'
+              ? 'right-[-560px]'
               : showButton === true
               ? 'right-0 pb-[90px]'
               : ''
