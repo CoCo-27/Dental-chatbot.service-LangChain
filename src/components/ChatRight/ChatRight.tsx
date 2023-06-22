@@ -7,7 +7,7 @@ import itemServices from 'src/services/itemServices';
 import { isEmpty } from 'src/utils/isEmpty';
 import Loading from '../Icon/Loader';
 
-const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
+const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
   const { Option } = Select;
   const [loadingSubName, setLoadingSubName] = useState(false);
   const [loadingValue, setLoadingValue] = useState(false);
@@ -153,7 +153,9 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
 
   return (
     <div
-      className={`flex h-full w-full flex-none flex-col bg-[#FEF6E4] rounded p-8 gap-8 text-[20px] text-[#00185A] transition-all overflow-y-auto`}
+      className={`flex h-full w-full flex-none flex-col bg-[#FEF6E4] rounded gap-8 text-[20px] text-[#00185A] transition-all overflow-y-auto ${
+        showButton === null ? 'p-8' : 'p-4'
+      }`}
     >
       {/* ---------- Treatment --------------*/}
       <div className="flex flex-col bg-white rounded-lg p-4">
@@ -362,7 +364,7 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
@@ -390,7 +392,7 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
@@ -407,7 +409,7 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
