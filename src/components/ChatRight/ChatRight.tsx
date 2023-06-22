@@ -337,7 +337,7 @@ const Rightbar = ({ extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-sm font-medium text-gray-900 dark:text-white text-lg"
+                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
