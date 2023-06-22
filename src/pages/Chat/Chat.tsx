@@ -81,6 +81,7 @@ const Chat = () => {
             )}
           </div>
           <RightBar
+            showButton={showButton}
             extraData={extraData}
             setExtraData={setExtraData}
             array={array}
