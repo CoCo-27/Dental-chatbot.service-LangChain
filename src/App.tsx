@@ -21,19 +21,23 @@ const App = () => {
       setScreenSize(getCurrentDimension());
     };
     window.addEventListener('resize', updateDimension);
+    if (window.location.pathname !== '/faq') {
+      const head = document.querySelector('head');
+      const script = document.createElement('script');
+      script.setAttribute('id', 'widgets');
 
-    if (screenSize.width >= 1200) {
-      if (window.location.pathname !== '/faq') {
-        const head = document.querySelector('head');
-        const script = document.createElement('script');
-
+      if (screenSize.width >= 1200) {
         script.setAttribute('src', '//localhost:8081/widget.js');
         head.appendChild(script);
-        return () => {
-          head.removeChild(script);
-        };
+      } else {
+        const widgetsELem = document.getElementById('widgets');
+        if (widgetsELem !== null) widgetsELem.remove();
       }
-    } else {
+      return () => {
+        if (screenSize.width >= 1200) {
+          head.removeChild(script);
+        }
+      };
     }
     return () => {
       window.removeEventListener('resize', updateDimension);
