@@ -339,11 +339,11 @@ const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
+                        className="flex flex-row-reverse w-1/2 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
-                      <div className="w-2/3">
+                      <div className="w-1/2">
                         <Select
                           defaultValue={'Bitte wählen'}
                           style={{ width: '100%' }}
@@ -364,11 +364,11 @@ const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
+                        className="flex flex-row-reverse w-1/2 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
-                      <div className="w-2/3">
+                      <div className="w-1/2">
                         <Radio.Group
                           style={{ width: '100%' }}
                           key={`radio-${index}`}
@@ -392,11 +392,11 @@ const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
+                        className="flex flex-row-reverse w-1/2 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
-                      <div className="w-2/3">
+                      <div className="w-1/2">
                         <Input
                           style={{ width: '100%' }}
                           onChange={(e) =>
@@ -409,11 +409,11 @@ const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
                     <>
                       <label
                         htmlFor="item_type"
-                        className="flex flex-row-reverse w-1/3 block text-xs font-medium text-gray-900 dark:text-white"
+                        className="flex flex-row-reverse w-1/2 block text-xs font-medium text-gray-900 dark:text-white"
                       >
                         {item.name}:
                       </label>
-                      <div className="w-2/3">
+                      <div className="w-1/2">
                         <InputNumber
                           min={1}
                           max={10}
