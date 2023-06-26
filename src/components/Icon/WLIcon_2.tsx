@@ -12,7 +12,7 @@ const WLIcon_2 = () => {
       width="40px"
       height="40px"
       viewBox="0 0 171 171"
-      enable-background="new 0 0 171 171"
+      enableBackground="new 0 0 171 171"
       xmlSpace="preserve"
     >
       <path

@@ -65,7 +65,7 @@ const Header = ({ menu, isSmall, isSign }: Props) => {
   return (
     <Menu>
       <div
-        className={`fixed w-full flex text-navy-700 items-center font-semibold justify-between bg-gradient-to-r from-[#f5f5f5] to-teal-100 shadow-md z-50 px-8 transition-all duration-300 h-[90px] 
+        className={`fixed w-full flex text-navy-700 items-center font-semibold justify-between bg-gradient-to-r from-[#f5f5f5] to-teal-100 shadow-lg z-50 px-8 transition-all duration-300 h-[90px] 
 			`}
       >
         <img
