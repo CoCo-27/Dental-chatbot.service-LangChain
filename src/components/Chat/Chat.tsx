@@ -6,6 +6,7 @@ import uploadServices from 'src/services/uploadServices';
 import historyServices from 'src/services/historyServices';
 import { isEmpty } from 'src/utils/isEmpty';
 import { useNavigate } from 'react-router-dom';
+import treatmentServices from 'src/services/treatmentServices';
 
 const Chat = ({ extraData, array, setArray }) => {
   localStorage.setItem('extraData', JSON.stringify(extraData));
@@ -13,13 +14,24 @@ const Chat = ({ extraData, array, setArray }) => {
   const navigate = useNavigate();
   const langDetect = new LanguageDetect();
   const [formValue, setFormValue] = useState('');
+  const [lvlData, setLvlData] = useState(null);
 
   const [text, setText] = useState({
     data: '',
     type: false,
   });
-  const [isFree, setIsFree] = useState(1);
+  const [isFree, setIsFree] = useState(0);
   const req_qa_box = useRef(null);
+
+  useEffect(() => {
+    treatmentServices
+      .getItems()
+      .then((res) => {
+        setLvlData(res.data.data[0].value);
+      })
+      .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     req_qa_box.current.scrollTop = req_qa_box.current.scrollHeight;
@@ -55,14 +67,7 @@ const Chat = ({ extraData, array, setArray }) => {
   };
 
   const handleMessage = async (isClicked) => {
-    const lang_type = langDetect.detect(
-      isClicked === '' ? formValue : isClicked
-    );
-    const result = lang_type
-      .filter((item, index) => item[0] === 'english' || item[0] === 'german')
-      .sort((a, b) => b[1] - a[1]);
-
-    if (!localStorage.getItem('email') && isFree !== 1) {
+    if (isFree === -1) {
       notification.warning({
         message: '',
         description: 'Sie müssen sich für mehr als eine Frage registrieren',
@@ -73,66 +78,128 @@ const Chat = ({ extraData, array, setArray }) => {
       });
       navigate('/login');
     } else {
-      // After press enter, the input value is initialized
-      setFormValue('');
+      const question = isClicked === '' ? formValue : isClicked;
+      const lang_type = langDetect.detect(question);
+      const result = lang_type
+        .filter((item, index) => item[0] === 'english' || item[0] === 'german')
+        .sort((a, b) => b[1] - a[1]);
+
       const save = array.slice();
       // const save_history = history;
       save.push({
-        message: isClicked === '' ? formValue : isClicked,
+        message: question,
         flag: false,
       });
-      save.push({ message: '...', flag: true });
       setArray(save);
 
-      const extraDATA = Object.entries(extraData);
-      const ratingData = {
-        value: isClicked === '' ? formValue : isClicked,
-        rating: '',
-      };
+      const chatHistory = JSON.parse(localStorage.getItem('open_chat_history'));
+      const indexHistiry = !localStorage.getItem('email')
+        ? 100
+        : isClicked === ''
+        ? 100
+        : chatHistory.findIndex((obj) => obj.message === isClicked);
+      console.log('indexHistory = ', indexHistiry);
+      if (!localStorage.getItem('email') || indexHistiry <= 4) {
+        const data = {
+          value: question,
+          lvlData: lvlData,
+          isFree: isFree,
+        };
+        uploadServices
+          .questionMessage(data)
+          .then((res) => {
+            let update = save.slice();
+            if (res.data.type === -1) {
+              const data = res.data.data.map((obj) => ({
+                message: obj,
+                flag: false,
+                isButton: true,
+                language: 'english',
+              }));
+              update = update.concat(data);
+            } else {
+              const questions = res.data.data.text.split('\n');
 
-      historyServices.addQuestion(ratingData);
-
-      const data = {
-        value: isClicked === '' ? formValue : isClicked,
-        extra: extraDATA,
-        type: isClicked === '' ? false : true,
-        email: localStorage.getItem('email')
-          ? localStorage.getItem('email')
-          : 'nothing',
-      };
-      uploadServices
-        .requestMessage(data)
-        .then((res) => {
-          const update = save.slice();
-          if (res.data.type === false) {
-            const sentences1 = res.data.data.text;
-            update[update.length - 1].message = sentences1;
+              questions.map((item) => {
+                update.push({
+                  message: item.replace(/[0-9]/g, '').replace('.', ''),
+                  flag: false,
+                  isButton: true,
+                  language: 'de ',
+                });
+                return update;
+              });
+            }
+            setArray(update);
+            localStorage.setItem('open_chat_history', JSON.stringify(update));
+            setIsFree(res.data.isFree);
+          })
+          .catch((err) => {
+            const update = save.slice();
+            update[update.length - 1].message =
+              'Bitte warten. WUNSCHLACHEN AI ist in diesem Bereich noch nicht trainiert.';
             update[update.length - 1].flag = true;
-            update[update.length - 1].isButton = false;
-            update[update.length - 1].language = result[0][0];
-          } else {
-            update[update.length - 1].message = res.data.data.text;
-            update[update.length - 1].flag = true;
-            update[update.length - 1].isButton = false;
-            update[update.length - 1].language = result[0][0];
-          }
-          setArray(update);
-          localStorage.setItem('open_chat_history', JSON.stringify(update));
-          setIsFree(isFree + 1);
-        })
-        .catch((err) => {
-          console.log(err);
-          const update = save.slice();
-          update[update.length - 1].message =
-            'Bitte warten. WUNSCHLACHEN AI ist in diesem Bereich noch nicht trainiert.';
-          update[update.length - 1].flag = true;
-          setArray(update);
-          notification.error({
-            description: err.response.data.message,
-            message: '',
-            duration: 2,
+            setArray(update);
+            notification.error({
+              description: err.response.data.message,
+              message: '',
+              duration: 2,
+            });
           });
-        });
+      } else {
+        // After press enter, the input value is initialized
+        setFormValue('');
+        save.push({ message: '...', flag: true });
+        setArray(save);
+        const extraDATA = Object.entries(extraData);
+        const ratingData = {
+          value: question,
+          rating: '',
+        };
+
+        historyServices.addQuestion(ratingData);
+
+        const data = {
+          value: question,
+          extra: extraDATA,
+          type: isClicked === '' ? false : true,
+          email: localStorage.getItem('email')
+            ? localStorage.getItem('email')
+            : 'nothing',
+        };
+        uploadServices
+          .requestMessage(data)
+          .then((res) => {
+            let update = save.slice();
+            if (res.data.type === 0) {
+              update[update.length - 1].message = res.data.data.text;
+              update[update.length - 1].flag = true;
+              update[update.length - 1].isButton = false;
+              update[update.length - 1].language = result[0][0];
+            } else if (res.data.type === 1) {
+              update[update.length - 1].message = res.data.data.text;
+              update[update.length - 1].flag = true;
+              update[update.length - 1].isButton = false;
+              update[update.length - 1].language = result[0][0];
+            }
+
+            setArray(update);
+            localStorage.setItem('open_chat_history', JSON.stringify(update));
+          })
+          .catch((err) => {
+            console.log(err);
+            const update = save.slice();
+            update[update.length - 1].message =
+              'Bitte warten. WUNSCHLACHEN AI ist in diesem Bereich noch nicht trainiert.';
+            update[update.length - 1].flag = true;
+            setArray(update);
+            notification.error({
+              description: err.response.data.message,
+              message: '',
+              duration: 2,
+            });
+          });
+      }
     }
   };
 
@@ -171,6 +238,7 @@ const Chat = ({ extraData, array, setArray }) => {
             ref={inputRef}
             className="m-0 w-10/12 rounded resize-none border border-black/20 overflow-hidden bg-transparent text-black hover:border-[#1976d2] dark:bg-transparent dark:text-white py-2 pl-4"
             value={formValue}
+            disabled={localStorage.getItem('email') ? false : true}
             required
             placeholder="Eine Nachricht schreiben ..."
             onChange={(e) => setFormValue(e.target.value)}

@@ -23,7 +23,7 @@ const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
     treatmentServices
       .getItems()
       .then((res) => {
-        console.log(res);
+        console.log(res.data.data[0].value);
         setTreatmentArray(res.data.data[0].value);
       })
       .catch((error) => console.log(error));
@@ -31,7 +31,6 @@ const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
     itemServices
       .getItems()
       .then((res) => {
-        console.log(res);
         setItemArray(res.data.data[0].value);
       })
       .catch((error) => console.log(error));
@@ -62,7 +61,6 @@ const Rightbar = ({ showButton, extraData, setExtraData, array, setArray }) => {
         .questionMessage(data)
         .then((res) => {
           setLoadingSubName(false);
-          console.log(res.data.data.text);
           const update = array.slice();
 
           const questions = res.data.data.text.split('\n');
