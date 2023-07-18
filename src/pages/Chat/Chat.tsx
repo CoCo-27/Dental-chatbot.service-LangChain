@@ -4,6 +4,7 @@ import { IconChevronsLeft, IconChevronsRight } from '@tabler/icons-react';
 import ChatMiddle from 'src/components/Chat/Chat';
 import RightBar from 'src/components/ChatRight/ChatRight';
 import greeting from '../../config/greeting';
+import treatmentServices from 'src/services/treatmentServices';
 
 function getCurrentDimension() {
   return {
@@ -30,6 +31,25 @@ const Chat = () => {
           },
         ]
   );
+
+  useEffect(() => {
+    treatmentServices
+      .getItems()
+      .then((res) => {
+        if (!localStorage.getItem('email')) {
+          const data = res.data.data[0].value.map((obj) => ({
+            message: obj.name,
+            flag: false,
+            isButton: true,
+            language: 'english',
+          }));
+          data.unshift(...array);
+          setArray(data);
+        }
+      })
+      .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
