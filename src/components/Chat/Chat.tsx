@@ -91,7 +91,6 @@ const Chat = ({ extraData, array, setArray }) => {
         flag: false,
       });
       setArray(save);
-
       const chatHistory = JSON.parse(localStorage.getItem('open_chat_history'));
       const indexHistiry = !localStorage.getItem('email')
         ? 100
@@ -99,7 +98,7 @@ const Chat = ({ extraData, array, setArray }) => {
         ? 100
         : chatHistory.findIndex((obj) => obj.message === isClicked);
       console.log('indexHistory = ', indexHistiry);
-      if (!localStorage.getItem('email') || indexHistiry <= 4) {
+      if (!localStorage.getItem('email') || indexHistiry <= lvlData.length) {
         const data = {
           value: question,
           lvlData: lvlData,
